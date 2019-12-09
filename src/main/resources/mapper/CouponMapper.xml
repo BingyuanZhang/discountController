@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmu.discount.mapper.CouponMapper">
+    <resultMap id="coupon" type="coupon">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coupon_rule_id" property="couponRuleId"/>
+        <result column="coupon_sn" property="couponSn"/>
+        <result column="begin_time" property="beginTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="used_time" property="usedTime"/>
+        <result column="name" property="name"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="is_deleted" property="beDelete"/>
+        <result column="status" property="statusCode"/>
+    </resultMap>
+    <select id="findCouponById" parameterType="Integer" resultMap="coupon">
+        select id,user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,is_deleted status from coupon where id=#{id}
+    </select>
+    <insert id="addCoupon" parameterType="coupon" useGeneratedKeys="true" keyProperty="id">
+        insert into coupon(user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,is_deleted,status)
+        values (#{userId},#{couponRuleId},#{couponSn},#{beginTime},#{endTime},#{usedTime},#{name}, #{picUrl}, #{gmtCreate}, #{gmtModified},#{beDelete},#{statusCode})
+    </insert>
+    <delete id="deleteCouponById" parameterType="Integer">
+        delete from coupon where id=#{id}
+    </delete>
+    <update id="updateCoupon" parameterType="coupon">
+        update coupon
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userId!=null">user_id=#{userId},</if>
+            <if test="couponRuleId!=null">coupon_rule_id=#{couponRuleId},</if>
+            <if test="couponSn!=null">coupon_sn=#{couponSn},</if>
+            <if test="beginTime!=null">begin_time=#{beginTime},</if>
+            <if test="endTime!=null">end_time=#{endTime},</if>
+            <if test="usedTime!=null">used_time=#{usedTime},</if>
+            <if test="name!=null">name=#{name},</if>
+            <if test="picUrl!=null">pic_url=#{picUrl},</if>
+            <if test="gmtCreate!=null">gmt_create=#{gmtCreate},</if>
+            <if test="gmtModified!=null">gmt_modified=#{gmtModified},</if>
+            <if test="beDelete!=null">is_delete=#{beDelete},</if>
+            <if test="statusCode!=null">status=#{status},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+</mapper>
