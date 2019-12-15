@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xmu.discount.mapper.CouponRuleMapper">
-    <resultMap id="couponRule" type="couponRule">
+    <resultMap id="couponRulePo" type="couponRulePo">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="brief" property="brief"/>
@@ -17,20 +17,20 @@
         <result column="gmt_modified" property="gmtModified"/>
         <result column="is_deleted" property="beDelete"/>
     </resultMap>
-    <select id="findCouponRuleById" parameterType="Integer" resultMap="couponRule">
+    <select id="findCouponRulePoById" parameterType="Integer" resultMap="couponRulePo">
         select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted from coupon_rule where id=#{id}
     </select>
 
-    <insert id="addCouponRule" parameterType="couponRule" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addCouponRulePo" parameterType="couponRulePo" useGeneratedKeys="true" keyProperty="id">
         insert into coupon_rule(name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted)
-        values (#{name},#{brief},#{begin_time},#{end_time},#{pic_url},#{valid_period},#{strategy}, #{total}, #{goods_list1}, #{goods_list2},#{gmt_create},#{gmt_modified},#{is_deleted})
+        values (#{name},#{brief},#{begin_time},#{end_time},#{pic_url},#{valid_period},#{strategy}, #{total}, #{goods_list1}, #{goods_list2},#{gmt_create},#{gmt_modified})
     </insert>
 
     <delete id="deleteCouponRuleById" parameterType="Integer">
-        delete from couponRule where id=#{id}
+        update coupon_rule is_delete=#{beDelete} WHERE id=1
     </delete>
 
-    <update id="updateCouponRule" parameterType="couponRule">
+    <update id="updateCouponRulePo" parameterType="couponRulePo">
         update coupon
         <trim prefix="set" suffixOverrides=",">
             <if test="name!=null">name=#{name},</if>
@@ -45,9 +45,13 @@
             <if test="goodsList1!=null">goods_list1=#{goodsList1},</if>
             <if test="goodsList2!=null">goods_list2=#{goodsList2},</if>
             <if test="strategy!=null">strategy=#{strategy},</if>
-            <if test="total!=null">total=#{total},</if>
+            <if test="total!=null">total=#{total}</if>
 
         </trim>
         WHERE id=#{id}
     </update>
+
+    <select id="getAllCouponRulePos" resultType="CouponRule" >
+        select * from coupon_rule
+    </select>
 </mapper>

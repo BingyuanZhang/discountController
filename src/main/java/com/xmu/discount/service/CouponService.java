@@ -1,6 +1,9 @@
 package com.xmu.discount.service;
 
 import com.xmu.discount.domain.Coupon;
+import com.xmu.discount.domain.CouponPo;
+
+import java.util.List;
 
 /**
  * @Author Zhang BingYuan
@@ -10,7 +13,6 @@ public interface CouponService {
 
     /**
      * 用id找到Coupon对象
-     *
      * @param id
      * @return
      */
@@ -18,14 +20,15 @@ public interface CouponService {
 
     /**
      *增加Coupon对象
-     * @param coupon
+     * @param couponPo
      * @return
      */
-    public boolean addCoupon(Coupon coupon);
+    public CouponPo addCouponPo(CouponPo couponPo);
 
     /**
-     *用id更新Coupon对象
+     * 用id更新Coupon对象
      * @param id
+     * @param coupon
      * @return
      */
     public boolean updateCouponById(Integer id,Coupon coupon);
@@ -37,4 +40,9 @@ public interface CouponService {
      */
     public boolean deleteCouponById(Integer id);
 
+    /**
+     * 获取所有优惠券
+     * @return
+     */
+    public List<Coupon> getAllCoupons() throws Exception;
 }

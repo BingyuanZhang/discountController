@@ -1,13 +1,14 @@
 package com.xmu.discount.controller;
 
-import com.xmu.discount.domain.Coupon;
-import com.xmu.discount.domain.CouponRule;
+import com.xmu.discount.domain.*;
 import com.xmu.discount.service.CouponRuleService;
 import com.xmu.discount.service.impl.CouponServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author Zhang BingYuan
@@ -23,61 +24,85 @@ public class discountController {
     public CouponRuleService couponRuleService;
 
     /**
-     * 添加优惠券
+     * 添加优惠券规则
      */
     @PostMapping("/couponRules")
-    public Object addCoupon(@RequestBody CouponRule couponRule) {
-        if (couponRule == null) {
+    public Object addCouponRulePo(@RequestBody CouponRulePo couponRulePo) {
+        if (couponRulePo == null) {
             System.out.println("错误！！！");
         }
-        boolean bool = couponRuleService.addCouponRule(couponRule);
-        return bool;
+
+        CouponRulePo couponRulePo1 = couponRuleService.addCouponRulePo(couponRulePo);
+        return couponRulePo1;
     }
 
     /**
-     * 查看一种优惠券
+     * 查看一种优惠券规则
      */
     @GetMapping("/couponRules/{id}")
-    public Object findCoupon(@PathVariable Integer id) {
-        CouponRule couponRuleById = couponRuleService.findCouponRuleById(id);
-        return couponRuleById;
+    public Object findCouponRule(@PathVariable Integer id) throws Exception {
+        CouponRule couponRulePoById = couponRuleService.findCouponRuleById(id);
+        return couponRulePoById;
 
     }
 
     /**
-     * 修改优惠券信息
+     * 修改优惠券规则
      */
     @PutMapping("/couponRules/{id}")
-    public Object updateCoupon(@PathVariable Integer id, @RequestBody CouponRule couponRule) {
-        boolean bool = couponRuleService.updateCouponRule(id, couponRule);
-        return bool;
+    public Object updateCouponRule(@PathVariable Integer id, @RequestBody CouponRulePo couponRulePo) {
+        CouponRulePo couponRulePo1 = couponRuleService.updateCouponRulePo(id, couponRulePo);
+        return couponRulePo1;
 
     }
 
     /**
-     * 删除一种优惠券
+     * 删除一种优惠券规则
      */
     @DeleteMapping("/couponRules/{id}")
-    public Object delete(@PathVariable Integer id) {
-        boolean bool = couponRuleService.deleteCouponRuleById(id);
-        return bool;
+    public Object deleteCouponRule(@PathVariable Integer id) {
+        couponRuleService.deleteCouponRuleById(id);
+        return null;
 
+    }
+
+    /**
+     * 管理员查看规则列表
+     */
+    @GetMapping("/couponRules")
+    public List<CouponRule> getAllCouponRules() throws Exception {
+        List<CouponRule> allCouponRules = couponRuleService.getAllCouponRules();
+        return allCouponRules;
     }
 
 
     /**
-     * 根据条件查找优惠券
+     * 获取所有的优惠券
      */
-    @GetMapping("/couponRules")
-    public Object findCoupon(String name, Short type, Short status,
-                             @RequestParam(defaultValue = "1") Integer page,
-                             @RequestParam(defaultValue = "10") Integer limit,
-                             @RequestParam(defaultValue = "add_time") String sort,
-                             @RequestParam(defaultValue = "desc") String order) {
+    @GetMapping("/coupons")
+    public List<Coupon> getAllCoupons() throws Exception {
+        List<Coupon> allCoupons = couponService.getAllCoupons();
+        return allCoupons;
+    }
 
+    @PostMapping("/coupons")
+    public Object addCoupon(@RequestBody CouponPo couponPo) {
+        CouponPo couponPo1 = couponService.addCouponPo(couponPo);
+        return couponPo1;
+    }
 
+    @GetMapping("/coupons/availableCoupons")
+    public Object getAvailableCoupons(@RequestBody List<CartItem> cartItemList) {
         return null;
     }
 
+    @GetMapping("/payment/withPromotion")
+    public Payment getPayment(@RequestBody Order order) {
+        return null;
+    }
 
+    @GetMapping("/orderItem/withCouponPrice")
+    public List<OrderItem> getNewOrderItem(@RequestBody List<OrderItem> orderItems) {
+        return null;
+    }
 }

@@ -1,9 +1,11 @@
 package com.xmu.discount.mapper;
 
-import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponRule;
+import com.xmu.discount.domain.CouponRulePo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**Mapper接口，用于和数据库交互
  * @Author Zhang BingYuan
@@ -12,11 +14,35 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface CouponRuleMapper {
-    public boolean addCouponRule(CouponRule couponRule);
-
+    /**
+     * 增加一个CouponRule
+     * @param couponRulePo
+     * @return
+     */
+    public Boolean addCouponRulePo(CouponRulePo couponRulePo);
+    /**
+     * 根据id删除CouponRule
+     * @param id
+     * @return
+     */
     public boolean deleteCouponRuleById(Integer id);
 
-    public boolean updateCouponRule(CouponRule couponRule);
+    /**
+     * 更新CouponRule
+     * @param couponRulePo
+     * @return
+     */
+    public boolean updateCouponRulePo(CouponRulePo couponRulePo);
+    /**
+     * 通过id查找CouponRule
+     * @param id
+     * @return
+     */
+    public CouponRulePo findCouponRulePoById(Integer id);
 
-    public CouponRule findCouponRuleById(Integer id);
+    /**
+     *  管理员查看规则列表
+     * @return
+     */
+    public List<CouponRulePo> getAllCouponRulePos();
 }

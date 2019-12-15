@@ -1,17 +1,49 @@
 package com.xmu.discount.service;
 
 import com.xmu.discount.domain.CouponRule;
+import com.xmu.discount.domain.CouponRulePo;
+
+import java.util.List;
 
 /**
  * @Author Zhang BingYuan
  * @Date 2019/12/8 12:03
  */
 public interface CouponRuleService {
-    public boolean addCouponRule(CouponRule couponRule);
+    /**
+     * 增加一个CouponRule
+     * @param couponRulePo
+     * @return
+     */
+    public CouponRulePo addCouponRulePo(CouponRulePo couponRulePo);
 
-    public boolean deleteCouponRuleById(Integer id);
+    /**
+     * 根据id查找CouponRule
+     * @param id
+     * @return
+     */
+    public Object deleteCouponRuleById(Integer id);
 
-    public boolean updateCouponRule(Integer id,CouponRule couponRule);
+    /**
+     * 通过id更新CouponRule
+     * @param id
+     * @param couponRulePo
+     * @return
+     */
+    public CouponRulePo updateCouponRulePo(Integer id,CouponRulePo couponRulePo);
 
-    public CouponRule findCouponRuleById(Integer id);
+    /**
+     * 通过id查找CouponRule
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public CouponRule findCouponRuleById(Integer id) throws Exception;
+
+    /**
+     *  管理员查看规则列表
+     * @return
+     */
+    public List<CouponRule> getAllCouponRules() throws Exception;
+
 }
