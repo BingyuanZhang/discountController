@@ -1,5 +1,7 @@
 package com.xmu.discount.service;
 
+import com.xmu.discount.domain.CartItem;
+import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
 
@@ -41,9 +43,11 @@ public interface CouponRuleService {
     public CouponRule findCouponRuleById(Integer id) throws Exception;
 
     /**
-     *  管理员查看规则列表
+     * 管理员查看规则列表
      * @return
+     * @throws Exception
      */
     public List<CouponRule> getAllCouponRules() throws Exception;
+
 
 }

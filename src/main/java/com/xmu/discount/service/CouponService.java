@@ -1,5 +1,6 @@
 package com.xmu.discount.service;
 
+import com.xmu.discount.domain.CartItem;
 import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponPo;
 
@@ -45,4 +46,11 @@ public interface CouponService {
      * @return
      */
     public List<Coupon> getAllCoupons() throws Exception;
+
+    /**
+     * 获取可用的优惠券
+     * @param cartItemList
+     * @return
+     */
+    public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList);
 }

@@ -98,26 +98,9 @@ public class discountController {
      */
     @GetMapping("/coupons/availableCoupons")
     public Object getAvailableCoupons(@RequestBody List<CartItem> cartItemList) {
-        return null;
+        List<Coupon> availableCoupons = couponService.getAvailableCoupons(cartItemList);
+        return availableCoupons;
     }
 
-    /**
-     * 返回应付价格
-     * @param order
-     * @return
-     */
-    @GetMapping("/payment/withPromotion")
-    public Payment getPayment(@RequestBody Order order) {
-        return null;
-    }
 
-    /**
-     * 提供一个计算优惠券优惠明细的接口
-     * @param orderItems
-     * @return
-     */
-    @GetMapping("/orderItem/withCouponPrice")
-    public List<OrderItem> getNewOrderItem(@RequestBody List<OrderItem> orderItems) {
-        return null;
-    }
 }

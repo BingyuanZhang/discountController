@@ -1,6 +1,7 @@
 package com.xmu.discount.service.impl;
 
 import com.xmu.discount.dao.CouponDao;
+import com.xmu.discount.domain.CartItem;
 import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponPo;
 import com.xmu.discount.service.CouponService;
@@ -84,5 +85,16 @@ public class CouponServiceImpl implements CouponService {
             allCoupons.add(coupon);
         }
         return allCoupons;
+    }
+
+    /**
+     * 获取可用的优惠券
+     * @param cartItemList
+     * @return
+     */
+    @Override
+    public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList) {
+
+        return null;
     }
 }
