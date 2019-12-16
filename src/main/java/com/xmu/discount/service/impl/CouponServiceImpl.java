@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Zhang BingYuan
@@ -94,6 +96,21 @@ public class CouponServiceImpl implements CouponService {
      */
     @Override
     public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList) {
+
+        /*
+        获得所有的good的id
+         */
+        List<Integer> goodIdsList = new ArrayList<>();
+        for (CartItem cartItem : cartItemList) {
+            goodIdsList.add(cartItem.getProduct().getGoodsId());
+        }
+        /*
+        消除重复的id
+         */
+        HashSet<Integer> goodIdsSet = new HashSet<>(goodIdsList);
+        goodIdsList.clear();
+        goodIdsList.addAll(goodIdsSet);
+
 
         return null;
     }
