@@ -13,14 +13,19 @@ public class FatherChildUtil {
             throw new Exception("child 不是 father 的子类");
         }
         Class<?> fatherClass = father.getClass();
+        Class<?> childClass = child.getClass();
+
         Field[] declaredFields = fatherClass.getDeclaredFields();
         for (int i = 0; i < declaredFields.length; i++) {
             Field field=declaredFields[i];
-            Method method=fatherClass.getDeclaredMethod("get"+upperHeadChar(field.getName()));
-            Object obj = method.invoke(father);
-            field.setAccessible(true);
-            field.set(child,obj);
+
+            Method getMethod = fatherClass.getDeclaredMethod("get"+upperHeadChar(field.getName()));
+            Method setMethod = childClass.getMethod("set"+upperHeadChar(field.getName()),field.getType());
+            Object obj = getMethod.invoke(father);
+            setMethod.invoke(child,obj);
         }
+
+
 
     }
     public static String upperHeadChar(String in) {

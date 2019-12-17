@@ -72,4 +72,9 @@ public class CouponDao {
         return allCouponPos;
     }
 
+    public List<CouponPo> getCouponPoByCouponRuleId( String couponRuleIdString ) {
+        List<CouponPo> couponPoByCouponRuleId = couponMapper.getCouponPoByCouponRuleId(couponRuleIdString);
+        return couponPoByCouponRuleId;
+    }
+
 }

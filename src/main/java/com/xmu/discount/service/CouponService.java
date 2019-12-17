@@ -52,5 +52,5 @@ public interface CouponService {
      * @param cartItemList
      * @return
      */
-    public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList);
+    public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList) throws Exception;
 }

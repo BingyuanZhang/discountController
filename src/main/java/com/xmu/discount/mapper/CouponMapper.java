@@ -45,4 +45,10 @@ public interface CouponMapper {
      */
     public List<CouponPo> getAllCouponPos();
 
+    /**
+     * 查找couponRuleId在给出的list(已经转为String)中的couponPo
+     * @param couponRuleIdString
+     * @return
+     */
+    public List<CouponPo> getCouponPoByCouponRuleId( String couponRuleIdString );
 }

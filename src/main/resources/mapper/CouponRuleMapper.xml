@@ -69,4 +69,9 @@
     <select id="getAllCouponRuleVos" resultType="couponRuleVo">
         select id,goods_list1,goods_list2 from oomall_coupon_rule where is_deleted=0
     </select>
+
+
+    <select id="findCouponRulePoByIds" parameterType="String" resultType="couponRulePo">
+        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted from oomall_coupon_rule where id in #{getCouponRulePosById} and is_deleted=0
+    </select>
 </mapper>

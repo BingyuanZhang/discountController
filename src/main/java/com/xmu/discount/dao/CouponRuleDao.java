@@ -81,9 +81,23 @@ public class CouponRuleDao {
         return allCouponRulePos;
     }
 
+    /**
+     * 获取所有的CouponRule的id和goodsListn
+     * @return
+     */
     public List<CouponRuleVo> getAllCouponRuleVos()
     {
         List<CouponRuleVo> allCouponRuleVos = couponRuleMapper.getAllCouponRuleVos();
         return allCouponRuleVos;
+    }
+
+    /**
+     * 通过多个id获取多个couponRule
+     * @param couponRuleIdString
+     * @return
+     */
+    public List<CouponRulePo> getCouponRulePosByIds(String couponRuleIdString) {
+        List<CouponRulePo> couponRulePosByIds = couponRuleMapper.getCouponRulePosByIds(couponRuleIdString);
+        return  couponRulePosByIds;
     }
 }

@@ -18,7 +18,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Alias("couponRule")
+@Alias("couponRulePo")
 public class CouponRulePo {
     private Integer id;
     /**

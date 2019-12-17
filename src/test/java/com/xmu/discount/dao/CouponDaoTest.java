@@ -1,9 +1,11 @@
 package com.xmu.discount.dao;
 
 import com.xmu.discount.domain.Coupon;
+import com.xmu.discount.domain.CouponPo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -14,12 +16,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class CouponDaoTest {
-    static Coupon coupon=new Coupon();
-    @BeforeAll
-    public static void getCoupon() {
+    @Autowired
+    CouponDao couponDao;
 
-        coupon.setUserId(111);
-        coupon.setCouponSn("aksuh");
+    static CouponPo couponPo = new CouponPo();
+
+    @BeforeAll
+    public static void getCouponPo() {
+
+        couponPo.setUserId(111);
+        couponPo.setCouponSn("look");
+        couponPo.setName("12315");
     }
 
     @Test
@@ -27,7 +34,8 @@ class CouponDaoTest {
     }
 
     @Test
-    void addCoupon(Coupon coupon) {
+    void addCoupon() {
+        couponDao.addCouponPo(couponPo);
     }
 
     @Test

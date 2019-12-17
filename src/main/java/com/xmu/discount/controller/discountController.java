@@ -2,6 +2,7 @@ package com.xmu.discount.controller;
 
 import com.xmu.discount.domain.*;
 import com.xmu.discount.service.CouponRuleService;
+import com.xmu.discount.service.impl.CouponRuleServiceImpl;
 import com.xmu.discount.service.impl.CouponServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class discountController {
     @Autowired
     public CouponServiceImpl couponService;
     @Autowired
-    public CouponRuleService couponRuleService;
+    public CouponRuleServiceImpl couponRuleService;
 
     /**
      * 添加优惠券规则
@@ -97,7 +98,7 @@ public class discountController {
      * @return
      */
     @GetMapping("/coupons/availableCoupons")
-    public Object getAvailableCoupons(@RequestBody List<CartItem> cartItemList) {
+    public Object getAvailableCoupons(@RequestBody List<CartItem> cartItemList) throws Exception {
         List<Coupon> availableCoupons = couponService.getAvailableCoupons(cartItemList);
         return availableCoupons;
     }

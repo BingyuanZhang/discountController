@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Alias("coupon")
+@Alias("couponPo")
 public class CouponPo {
     private Integer id;
     /**

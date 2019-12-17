@@ -52,4 +52,11 @@ public interface CouponRuleMapper {
      * @return
      */
     public List<CouponRuleVo> getAllCouponRuleVos();
+
+    /**
+     * 通过多个id获取多个couponRule
+     * @param couponRuleIdString
+     * @return
+     */
+    public List<CouponRulePo> getCouponRulePosByIds(String couponRuleIdString);
 }

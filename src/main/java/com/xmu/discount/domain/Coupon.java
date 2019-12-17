@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 
+import javax.swing.plaf.synth.SynthListUI;
+
 /**
  * @Author: 数据库与对象模型标准组
  * @Description:优惠券对象
