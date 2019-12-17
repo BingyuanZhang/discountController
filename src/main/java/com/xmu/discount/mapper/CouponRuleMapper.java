@@ -2,6 +2,7 @@ package com.xmu.discount.mapper;
 
 import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
+import com.xmu.discount.domain.vo.CouponRuleVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -45,4 +46,10 @@ public interface CouponRuleMapper {
      * @return
      */
     public List<CouponRulePo> getAllCouponRulePos();
+
+    /**
+     * 获得CouponRule的id和goodsListn
+     * @return
+     */
+    public List<CouponRuleVo> getAllCouponRuleVos();
 }

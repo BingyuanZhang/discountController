@@ -2,6 +2,7 @@ package com.xmu.discount.dao;
 
 import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
+import com.xmu.discount.domain.vo.CouponRuleVo;
 import com.xmu.discount.mapper.CouponRuleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -78,5 +79,11 @@ public class CouponRuleDao {
     public List<CouponRulePo> getAllCouponRulePos() {
         List<CouponRulePo> allCouponRulePos=couponRuleMapper.getAllCouponRulePos();
         return allCouponRulePos;
+    }
+
+    public List<CouponRuleVo> getAllCouponRuleVos()
+    {
+        List<CouponRuleVo> allCouponRuleVos = couponRuleMapper.getAllCouponRuleVos();
+        return allCouponRuleVos;
     }
 }
