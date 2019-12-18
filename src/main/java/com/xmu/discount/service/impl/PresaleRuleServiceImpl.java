@@ -1,8 +1,8 @@
 package com.xmu.discount.service.impl;
 
-import com.xmu.discount.dao.PresaleDao;
+import com.xmu.discount.dao.PresaleRuleDao;
 import com.xmu.discount.domain.PresaleRule;
-import com.xmu.discount.service.PresaleService;
+import com.xmu.discount.service.PresaleRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
  * @date 2019/12/18 17:54
  */
 @Service
-public class PresaleServiceImpl implements PresaleService {
+public class PresaleRuleServiceImpl implements PresaleRuleService {
 
     @Autowired
-    PresaleDao presaleDao;
+    PresaleRuleDao presaleRuleDao;
     /**
      * 数据库中增加一个PresaleRule
      * @param presaleRule
@@ -23,7 +23,7 @@ public class PresaleServiceImpl implements PresaleService {
      */
     @Override
     public PresaleRule addPresaleRule(PresaleRule presaleRule) {
-        PresaleRule presaleRule1 = presaleDao.addPresaleRule(presaleRule);
+        PresaleRule presaleRule1 = presaleRuleDao.addPresaleRule(presaleRule);
         return presaleRule1;
     }
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface PresaleMapper {
+public interface PresaleRuleMapper {
 
     /**
      * 数据库中增加一个PresaleRule

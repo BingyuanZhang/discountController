@@ -1,7 +1,7 @@
 package com.xmu.discount.dao;
 
 import com.xmu.discount.domain.PresaleRule;
-import com.xmu.discount.mapper.PresaleMapper;
+import com.xmu.discount.mapper.PresaleRuleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
  * @date 2019/12/18 17:58
  */
 @Repository
-public class PresaleDao {
+public class PresaleRuleDao {
     @Autowired
-    PresaleMapper presaleMapper;
+    PresaleRuleMapper presaleRuleMapper;
 
     /**
      * 数据库中增加一个PresaleRule
@@ -22,7 +22,7 @@ public class PresaleDao {
      * @return
      */
     public PresaleRule addPresaleRule(PresaleRule presaleRule) {
-        Boolean bool = presaleMapper.addPresaleRule(presaleRule);
+        Boolean bool = presaleRuleMapper.addPresaleRule(presaleRule);
         if (bool.equals(true)) {
             return presaleRule;
         }

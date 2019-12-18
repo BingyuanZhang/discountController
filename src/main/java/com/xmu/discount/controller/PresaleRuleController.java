@@ -1,8 +1,7 @@
 package com.xmu.discount.controller;
 
-import com.xmu.discount.domain.CouponRulePo;
 import com.xmu.discount.domain.PresaleRule;
-import com.xmu.discount.service.impl.PresaleServiceImpl;
+import com.xmu.discount.service.impl.PresaleRuleServiceImpl;
 import com.xmu.discount.vo.PresaleRuleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +16,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/presale", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-public class PresaleController {
+public class PresaleRuleController {
 
     @Autowired
-    PresaleServiceImpl presaleService;
+    PresaleRuleServiceImpl presaleRuleService;
 
     /**
      *管理员根据条件查询预售信息
@@ -45,7 +44,7 @@ public class PresaleController {
      */
     @PostMapping("/presaleRules")
     public PresaleRule addPresaleRule(@RequestBody PresaleRule presaleRule) {
-        PresaleRule presaleRule1 = presaleService.addPresaleRule(presaleRule);
+        PresaleRule presaleRule1 = presaleRuleService.addPresaleRule(presaleRule);
         return presaleRule1;
     }
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 1.0
  * @date 2019/12/18 17:55
  */
-public interface PresaleService {
+public interface PresaleRuleService {
 
     /**
      * 数据库中增加一个PresaleRule
