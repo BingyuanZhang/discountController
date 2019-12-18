@@ -43,6 +43,5 @@ public class FatherChildUtilTest {
         for (Integer integer : list) {
             System.out.println(integer);
         }
-
     }
 }

@@ -1,7 +1,12 @@
 package com.xmu.discount.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.xmu.discount.domain.CouponRulePo;
+import com.xmu.discount.domain.PresaleRule;
+import com.xmu.discount.vo.PresaleRuleVo;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Zhang Bingyuan
@@ -11,5 +16,49 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/presale", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 public class PreSaleController {
+    /**
+     *管理员根据条件查询预售信息
+     * @param goodsId
+     * @param page
+     * @param limit
+     * @return
+     */
+    @GetMapping("/presaleRules")
+    public List<PresaleRuleVo> getPresaleRuleVoByInf(@RequestParam("goodsId") Integer goodsId,
+                                                     @RequestParam("page") Integer page,
+                                                     @RequestParam("limit") Integer limit) {
+        ArrayList<PresaleRuleVo> presaleRuleVos = new ArrayList<>();
+        return presaleRuleVos;
+    }
 
+    /**
+     *发布预售信息
+     * @param presaleRule
+     * @return
+     */
+    @PostMapping("/presaleRules")
+    public PresaleRule addPresaleRule(@RequestBody PresaleRule presaleRule) {
+
+    }
+
+    /**
+     *修改预售信息
+     * @param id
+     * @param PresaleRule
+     * @return
+     */
+    @PutMapping("/presaleRules/{id}")
+    public PresaleRule updatePresaleRuleById(@PathVariable Integer id, @RequestBody PresaleRule PresaleRule) {
+
+    }
+
+    /**
+     *查看预售信息详情
+     * @param id
+     * @return
+     */
+    @GetMapping("/presaleRules/{id}")
+    public PresaleRuleVo getPresaleRuleVoById(@PathVariable Integer id) {
+
+    }
 }

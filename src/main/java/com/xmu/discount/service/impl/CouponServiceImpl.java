@@ -2,10 +2,7 @@ package com.xmu.discount.service.impl;
 
 import com.xmu.discount.dao.CouponDao;
 import com.xmu.discount.dao.CouponRuleDao;
-import com.xmu.discount.domain.CartItem;
-import com.xmu.discount.domain.Coupon;
-import com.xmu.discount.domain.CouponPo;
-import com.xmu.discount.domain.CouponRulePo;
+import com.xmu.discount.domain.*;
 import com.xmu.discount.domain.vo.CouponRuleVo;
 import com.xmu.discount.service.CouponService;
 import com.xmu.discount.util.FatherChildUtil;
@@ -196,7 +193,17 @@ public class CouponServiceImpl implements CouponService {
 
         List<CouponRulePo> couponRulePosByIds = couponRuleDao.getCouponRulePosByIds(couponRuleIdString);
 
+        for (Coupon coupon : coupons) {
+            for (CouponRulePo couponRulePosById : couponRulePosByIds) {
+                if (couponRulePosById.getId().equals(coupon.getCouponRuleId())){
+                    CouponRule couponRule = new CouponRule();
+                    FatherChildUtil.fatherToChild(couponRulePosById,couponRule);
+                    coupon.setCouponRule(couponRule);
+                    couponRulePosByIds.remove(couponRulePosById);
+                }
+            }
+        }
 
-        return null;
+        return coupons;
     }
 }
