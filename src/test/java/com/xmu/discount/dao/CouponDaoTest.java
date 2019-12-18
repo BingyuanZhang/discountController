@@ -24,7 +24,6 @@ class CouponDaoTest {
     @BeforeAll
     public static void getCouponPo() {
 
-        couponPo.setUserId(111);
         couponPo.setCouponSn("look");
         couponPo.setName("12315");
     }
@@ -35,7 +34,7 @@ class CouponDaoTest {
 
     @Test
     void addCoupon() {
-        couponDao.addCouponPo(couponPo);
+        System.out.println("my  "+couponDao.addCouponPo(couponPo));
     }
 
     @Test

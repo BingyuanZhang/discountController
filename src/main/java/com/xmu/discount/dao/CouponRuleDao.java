@@ -17,14 +17,16 @@ import java.util.List;
 @Repository
 public class CouponRuleDao {
     @Autowired
-    public CouponRuleMapper couponRuleMapper;
+    CouponRuleMapper couponRuleMapper;
+
     /**
      * 增加一个CouponRule
+     *
      * @param couponRulePo
      * @return
      */
     public CouponRulePo addCouponRulePo(CouponRulePo couponRulePo) {
-        LocalDateTime localDateTime=LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
         couponRulePo.setGmtModified(localDateTime);
         couponRulePo.setGmtCreate(localDateTime);
         couponRulePo.setBeDeleted(false);
@@ -34,8 +36,10 @@ public class CouponRuleDao {
         }
         return null;
     }
+
     /**
      * 根据id删除CouponRule
+     *
      * @param id
      * @return
      */
@@ -43,8 +47,10 @@ public class CouponRuleDao {
         couponRuleMapper.deleteCouponRuleById(id);
         return null;
     }
+
     /**
      * 通过id更新CouponRule
+     *
      * @param id
      * @param couponRulePo
      * @return
@@ -56,13 +62,14 @@ public class CouponRuleDao {
         boolean bool = couponRuleMapper.updateCouponRulePo(couponRulePo);
         if (bool) {
             return couponRulePo;
-        }
-        else {
+        } else {
             return null;
         }
     }
+
     /**
      * 通过id查找CouponRule
+     *
      * @param id
      * @return
      */
@@ -77,27 +84,28 @@ public class CouponRuleDao {
      * @return
      */
     public List<CouponRulePo> getAllCouponRulePos() {
-        List<CouponRulePo> allCouponRulePos=couponRuleMapper.getAllCouponRulePos();
+        List<CouponRulePo> allCouponRulePos = couponRuleMapper.getAllCouponRulePos();
         return allCouponRulePos;
     }
 
     /**
      * 获取所有的CouponRule的id和goodsListn
+     *
      * @return
      */
-    public List<CouponRuleVo> getAllCouponRuleVos()
-    {
+    public List<CouponRuleVo> getAllCouponRuleVos() {
         List<CouponRuleVo> allCouponRuleVos = couponRuleMapper.getAllCouponRuleVos();
         return allCouponRuleVos;
     }
 
     /**
      * 通过多个id获取多个couponRule
+     *
      * @param couponRuleIdString
      * @return
      */
     public List<CouponRulePo> getCouponRulePosByIds(String couponRuleIdString) {
         List<CouponRulePo> couponRulePosByIds = couponRuleMapper.getCouponRulePosByIds(couponRuleIdString);
-        return  couponRulePosByIds;
+        return couponRulePosByIds;
     }
 }

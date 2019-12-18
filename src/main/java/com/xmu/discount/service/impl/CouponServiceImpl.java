@@ -202,6 +202,7 @@ public class CouponServiceImpl implements CouponService {
                     couponRulePosByIds.remove(couponRulePosById);
                 }
             }
+
         }
 
         return coupons;
