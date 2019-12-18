@@ -28,6 +28,7 @@ public class PreSaleController {
                                                      @RequestParam("page") Integer page,
                                                      @RequestParam("limit") Integer limit) {
         ArrayList<PresaleRuleVo> presaleRuleVos = new ArrayList<>();
+
         return presaleRuleVos;
     }
 
