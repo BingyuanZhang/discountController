@@ -1,5 +1,8 @@
 package com.xmu.discount.dao;
 
+import com.xmu.discount.domain.GoodsPo;
+import com.xmu.discount.mapper.GoodsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,5 +11,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class GoodsDao {
+
+    @Autowired
+    GoodsMapper goodsMapper;
+    public GoodsPo findGoodsPoById(Integer goodsId) {
+        GoodsPo goodsPoById = goodsMapper.findGoodsPoById(goodsId);
+        return goodsPoById;
+    }
 
 }

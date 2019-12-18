@@ -1,5 +1,6 @@
 package com.xmu.discount.mapper;
 
+import com.xmu.discount.domain.GoodsPo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +11,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface GoodsMapper {
-
+    /**
+     * 根据Id获取GoodsPo
+     *
+     * @param goodsId
+     * @return
+     */
+    public GoodsPo findGoodsPoById(Integer goodsId);
 }

@@ -17,9 +17,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class PresaleRuleDaoTest {
     @Autowired
     PresaleRuleDao presaleRuleDao;
-    @Autowired
-    PresaleRule
+
+    static PresaleRule presaleRule;
 
     @Before
     public void before()
+    {
+
+    }
 }

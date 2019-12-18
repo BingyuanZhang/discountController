@@ -39,8 +39,37 @@ public class PresaleRuleDao {
     }
 
     public List<PresaleRule> findPresaleRulesByGoodsId(Integer goodsId, Integer page, Integer limit) {
-        PageHelper.startPage(page,limit);
+        PageHelper.startPage(page, limit);
         List<PresaleRule> presaleRulesByGoodsId = presaleRuleMapper.findPresaleRulesByGoodsId(goodsId);
         return presaleRulesByGoodsId;
+    }
+
+    /**
+     * 修改预售信息
+     *
+     * @param id
+     * @param presaleRule
+     * @return
+     */
+    public PresaleRule updatePresaleRuleById(Integer id, PresaleRule presaleRule) {
+        presaleRule.setId(id);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        presaleRule.setGmtModified(localDateTime);
+        presaleRule.setGmtCreate(localDateTime);
+        Boolean bool = presaleRuleMapper.updatePresaleRuleById(presaleRule);
+        if (bool) {
+            return presaleRule;
+        }
+        return null;
+    }
+
+    /**
+     * 通过id查找PresaleRule
+     * @param id
+     * @return
+     */
+    public PresaleRule findPresaleRuleById(Integer id) {
+        PresaleRule presaleRule = presaleRuleMapper.findPresaleRuleById(id);
+        return  presaleRule;
     }
 }

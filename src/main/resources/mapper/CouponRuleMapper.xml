@@ -42,7 +42,7 @@
 
     <!-- 记得先判断 is_deleted=0 -->
     <update id="updateCouponRulePo" parameterType="couponRulePo">
-        update oomall_coupon
+        update oomall_coupon_rule
         <trim prefix="set" suffixOverrides=",">
             <if test="name!=null">name=#{name},</if>
             <if test="brief!=null">brief=#{brief},</if>
@@ -59,7 +59,7 @@
             <if test="total!=null">total=#{total}</if>
             <if test="collectedNum!=null">collected_num=#{collectedNum}</if>
         </trim>
-        WHERE id=#{id}
+        WHERE id=#{id} and is_delete=0
     </update>
 
     <select id="getAllCouponRulePos" resultType="couponRulePo" >

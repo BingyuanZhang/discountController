@@ -22,7 +22,8 @@ public class PresaleRuleController {
     PresaleRuleServiceImpl presaleRuleService;
 
     /**
-     *管理员根据条件查询预售信息
+     * 管理员根据条件查询预售信息
+     *
      * @param goodsId
      * @param page
      * @param limit
@@ -32,12 +33,13 @@ public class PresaleRuleController {
     public List<PresaleRuleVo> getPresaleRuleVoByInf(@RequestParam("goodsId") Integer goodsId,
                                                      @RequestParam("page") Integer page,
                                                      @RequestParam("limit") Integer limit) {
-        List<PresaleRuleVo> presaleRuleVos = presaleRuleService.findPresaleRuleVosByGoodsId(goodsId,page,limit);
+        List<PresaleRuleVo> presaleRuleVos = presaleRuleService.findPresaleRuleVosByGoodsId(goodsId, page, limit);
         return presaleRuleVos;
     }
 
     /**
-     *发布预售信息
+     * 发布预售信息
+     *
      * @param presaleRule
      * @return
      */
@@ -48,26 +50,27 @@ public class PresaleRuleController {
     }
 
     /**
-     *修改预售信息
+     * 修改预售信息
+     *
      * @param id
-     * @param PresaleRule
+     * @param presaleRule
      * @return
      */
     @PutMapping("/presaleRules/{id}")
-    public PresaleRule updatePresaleRuleById(@PathVariable Integer id, @RequestBody PresaleRule PresaleRule) {
-
-        return null;
-
+    public PresaleRule updatePresaleRuleById(@PathVariable Integer id, @RequestBody PresaleRule presaleRule) {
+        PresaleRule presaleRule1 = presaleRuleService.updatePresaleRuleById(id, presaleRule);
+        return presaleRule1;
     }
 
     /**
-     *查看预售信息详情
+     * 查看预售信息详情
+     *
      * @param id
      * @return
      */
     @GetMapping("/presaleRules/{id}")
     public PresaleRuleVo getPresaleRuleVoById(@PathVariable Integer id) {
-        return null;
-
+        PresaleRuleVo presaleRuleVoById = presaleRuleService.findPresaleRuleVoById(id);
+        return presaleRuleVoById;
     }
 }

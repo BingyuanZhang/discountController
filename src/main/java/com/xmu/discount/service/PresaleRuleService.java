@@ -15,6 +15,7 @@ public interface PresaleRuleService {
 
     /**
      * 数据库中增加一个PresaleRule
+     *
      * @param presaleRule
      * @return
      */
@@ -22,6 +23,7 @@ public interface PresaleRuleService {
 
     /**
      * 通过goodsId获取presaleRules
+     *
      * @param goodsId
      * @param page
      * @param limit
@@ -29,4 +31,19 @@ public interface PresaleRuleService {
      */
     public List<PresaleRuleVo> findPresaleRuleVosByGoodsId(Integer goodsId, Integer page, Integer limit);
 
+    /**
+     * 修改预售信息
+     *
+     * @param id
+     * @param presaleRule
+     * @return
+     */
+    public PresaleRule updatePresaleRuleById(Integer id, PresaleRule presaleRule);
+
+    /**
+     * 通过id获得PresaleRuleVo
+     * @param id
+     * @return
+     */
+    public PresaleRuleVo findPresaleRuleVoById(Integer id);
 }
