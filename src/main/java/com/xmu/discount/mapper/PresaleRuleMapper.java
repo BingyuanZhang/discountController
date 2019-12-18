@@ -4,6 +4,9 @@ import com.xmu.discount.domain.PresaleRule;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Zhang Bingyuan
  * @version 1.0
@@ -19,4 +22,11 @@ public interface PresaleRuleMapper {
      * @return
      */
     public Boolean addPresaleRule(PresaleRule presaleRule);
+
+    /**
+     * 查找goodsId为所查的，的presaleRule
+     * @param goodsId
+     * @return
+     */
+    public List<PresaleRule> findPresaleRulesByGoodsId(Integer goodsId);
 }

@@ -1,9 +1,15 @@
 package com.xmu.discount.dao;
 
+import com.github.pagehelper.PageHelper;
 import com.xmu.discount.domain.PresaleRule;
 import com.xmu.discount.mapper.PresaleRuleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Zhang Bingyuan
@@ -22,10 +28,19 @@ public class PresaleRuleDao {
      * @return
      */
     public PresaleRule addPresaleRule(PresaleRule presaleRule) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        presaleRule.setGmtCreate(localDateTime);
+        presaleRule.setGmtModified(localDateTime);
         Boolean bool = presaleRuleMapper.addPresaleRule(presaleRule);
         if (bool.equals(true)) {
             return presaleRule;
         }
         return null;
+    }
+
+    public List<PresaleRule> findPresaleRulesByGoodsId(Integer goodsId, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<PresaleRule> presaleRulesByGoodsId = presaleRuleMapper.findPresaleRulesByGoodsId(goodsId);
+        return presaleRulesByGoodsId;
     }
 }

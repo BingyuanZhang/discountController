@@ -32,8 +32,7 @@ public class PresaleRuleController {
     public List<PresaleRuleVo> getPresaleRuleVoByInf(@RequestParam("goodsId") Integer goodsId,
                                                      @RequestParam("page") Integer page,
                                                      @RequestParam("limit") Integer limit) {
-        ArrayList<PresaleRuleVo> presaleRuleVos = new ArrayList<>();
-
+        List<PresaleRuleVo> presaleRuleVos = presaleRuleService.findPresaleRuleVosByGoodsId(goodsId,page,limit);
         return presaleRuleVos;
     }
 
