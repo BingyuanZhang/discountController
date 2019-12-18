@@ -36,8 +36,8 @@ public class CouponRuleServiceImpl implements CouponRuleService {
      * @return
      */
     @Override
-    public Object deleteCouponRuleById(Integer id) {
-        couponRuleDao.deleteCouponRuleById(id);
+    public Object deleteCouponRulePoById(Integer id) {
+        couponRuleDao.deleteCouponRulePoById(id);
         return null;
     }
     /**
@@ -58,29 +58,21 @@ public class CouponRuleServiceImpl implements CouponRuleService {
      * @return
      */
     @Override
-    public CouponRule findCouponRuleById(Integer id) throws Exception {
+    public CouponRulePo findCouponRulePoById(Integer id) throws Exception {
         CouponRulePo couponRulePo = couponRuleDao.findCouponRulePoById(id);
-        if (couponRulePo==null) {
-            return null;
-        }
-        CouponRule couponRule = new CouponRule();
-        FatherChildUtil.fatherToChild(couponRulePo,couponRule);
-        return couponRule;
+        return couponRulePo;
     }
+
+
     /**
-     *  管理员查看规则列表
+     * 管理员分页获取所有的优惠券规则
+     * @param page
+     * @param limit
      * @return
      */
     @Override
-    public List<CouponRule> getAllCouponRules() throws Exception {
-        List<CouponRulePo> allCouponRulePos = couponRuleDao.getAllCouponRulePos();
-        List<CouponRule> allCouponRules = new ArrayList<>();
-        for (CouponRulePo couponRulePo : allCouponRulePos) {
-            CouponRule couponRule = new CouponRule();
-            FatherChildUtil.fatherToChild(couponRulePo,couponRule);
-            allCouponRules.add(couponRule);
-        }
-        return allCouponRules;
-
+    public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit) {
+        List<CouponRulePo> allCouponRulePos = couponRuleDao.adminGetAllCouponRulePos(page, limit);
+        return allCouponRulePos;
     }
 }

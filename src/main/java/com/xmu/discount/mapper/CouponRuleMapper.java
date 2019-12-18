@@ -26,14 +26,14 @@ public interface CouponRuleMapper {
      * @param id
      * @return
      */
-    public boolean deleteCouponRuleById(Integer id);
+    public Boolean deleteCouponRulePoById(Integer id);
 
     /**
      * 更新CouponRule
      * @param couponRulePo
      * @return
      */
-    public boolean updateCouponRulePo(CouponRulePo couponRulePo);
+    public Boolean updateCouponRulePo(CouponRulePo couponRulePo);
     /**
      * 通过id查找CouponRule
      * @param id
@@ -45,7 +45,7 @@ public interface CouponRuleMapper {
      *  管理员查看规则列表
      * @return
      */
-    public List<CouponRulePo> getAllCouponRulePos();
+    public List<CouponRulePo> adminGetAllCouponRulePos();
 
     /**
      * 获得CouponRule的id和goodsListn

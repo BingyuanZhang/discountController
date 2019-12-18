@@ -24,7 +24,7 @@ public interface CouponRuleService {
      * @param id
      * @return
      */
-    public Object deleteCouponRuleById(Integer id);
+    public Object deleteCouponRulePoById(Integer id);
 
     /**
      * 通过id更新CouponRule
@@ -40,14 +40,14 @@ public interface CouponRuleService {
      * @return
      * @throws Exception
      */
-    public CouponRule findCouponRuleById(Integer id) throws Exception;
+    public CouponRulePo findCouponRulePoById(Integer id) throws Exception;
+
 
     /**
-     * 管理员查看规则列表
+     * 分页获取所有的优惠券规则
+     * @param page
+     * @param limit
      * @return
-     * @throws Exception
      */
-    public List<CouponRule> getAllCouponRules() throws Exception;
-
-
+    public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit);
 }

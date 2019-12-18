@@ -1,5 +1,6 @@
 package com.xmu.discount.dao;
 
+import com.github.pagehelper.PageHelper;
 import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
 import com.xmu.discount.domain.vo.CouponRuleVo;
@@ -29,7 +30,6 @@ public class CouponRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         couponRulePo.setGmtModified(localDateTime);
         couponRulePo.setGmtCreate(localDateTime);
-        couponRulePo.setBeDeleted(false);
         boolean bool = couponRuleMapper.addCouponRulePo(couponRulePo);
         if (bool) {
             return couponRulePo;
@@ -43,8 +43,8 @@ public class CouponRuleDao {
      * @param id
      * @return
      */
-    public Object deleteCouponRuleById(Integer id) {
-        couponRuleMapper.deleteCouponRuleById(id);
+    public Object deleteCouponRulePoById(Integer id) {
+        couponRuleMapper.deleteCouponRulePoById(id);
         return null;
     }
 
@@ -83,9 +83,10 @@ public class CouponRuleDao {
      *
      * @return
      */
-    public List<CouponRulePo> getAllCouponRulePos() {
-        List<CouponRulePo> allCouponRulePos = couponRuleMapper.getAllCouponRulePos();
-        return allCouponRulePos;
+    public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<CouponRulePo> CouponRulePos = couponRuleMapper.adminGetAllCouponRulePos();
+        return CouponRulePos;
     }
 
     /**

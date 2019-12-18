@@ -35,7 +35,7 @@
     </insert>
 
     <!-- 记得先判断 is_deleted=0 -->
-    <update id="deleteCouponRuleById" parameterType="Integer">
+    <update id="deleteCouponRulePoById" parameterType="Integer">
         update oomall_coupon_rule is_delete=1 WHERE id=#{id}
     </update>
 
@@ -49,9 +49,7 @@
             <if test="beginTime!=null">begin_time=#{beginTime},</if>
             <if test="endTime!=null">end_time=#{endTime},</if>
             <if test="picUrl!=null">pic_url=#{picUrl},</if>
-            <if test="gmtCreate!=null">gmt_create=#{gmtCreate},</if>
             <if test="gmtModified!=null">gmt_modified=#{gmtModified},</if>
-            <if test="beDelete!=null">is_delete=#{beDelete},</if>
             <if test="validPeriod!=null">valid_period=#{validPeriod},</if>
             <if test="goodsList1!=null">goods_list1=#{goodsList1},</if>
             <if test="goodsList2!=null">goods_list2=#{goodsList2},</if>
@@ -62,7 +60,7 @@
         WHERE id=#{id} and is_delete=0
     </update>
 
-    <select id="getAllCouponRulePos" resultType="couponRulePo" >
+    <select id="adminGetAllCouponRulePos" resultType="couponRulePo" >
         select * from oomall_coupon_rule where is_deleted=0
     </select>
 
