@@ -24,7 +24,7 @@ public interface CouponRuleService {
      * @param id
      * @return
      */
-    public Object deleteCouponRulePoById(Integer id);
+    public Integer deleteCouponRulePoById(Integer id);
 
     /**
      * 通过id更新CouponRule

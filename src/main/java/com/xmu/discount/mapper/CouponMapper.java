@@ -19,7 +19,7 @@ public interface CouponMapper {
      * @param couponPo
      * @return
      */
-    public boolean addCouponPo(CouponPo couponPo);
+    public Integer addCouponPo(CouponPo couponPo);
     /**
      * 用id删除优惠券
      * @param id

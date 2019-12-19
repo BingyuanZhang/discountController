@@ -43,9 +43,14 @@ public class CouponRuleDao {
      * @param id
      * @return
      */
-    public Object deleteCouponRulePoById(Integer id) {
-        couponRuleMapper.deleteCouponRulePoById(id);
-        return null;
+    public Integer deleteCouponRulePoById(Integer id) {
+        try {
+            couponRuleMapper.deleteCouponRulePoById(id);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+        return id;
     }
 
     /**
@@ -59,12 +64,14 @@ public class CouponRuleDao {
         couponRulePo.setId(id);
         LocalDateTime localDateTime = LocalDateTime.now();
         couponRulePo.setGmtModified(localDateTime);
-        boolean bool = couponRuleMapper.updateCouponRulePo(couponRulePo);
-        if (bool) {
-            return couponRulePo;
-        } else {
+        try {
+            Integer integer = couponRuleMapper.updateCouponRulePo(couponRulePo);
+        } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
+        return couponRulePo;
+
     }
 
     /**
@@ -100,7 +107,7 @@ public class CouponRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         List<CouponRulePo> CouponRulePos = couponRuleMapper.userGetAllCouponRulePos();
         for (CouponRulePo couponRulePo : CouponRulePos) {
-            if (couponRulePo.getEndTime().isBefore(localDateTime)||couponRulePo.getBeginTime().isAfter(localDateTime)) {
+            if (couponRulePo.getEndTime().isBefore(localDateTime) || couponRulePo.getBeginTime().isAfter(localDateTime)) {
                 CouponRulePos.remove(couponRulePo);
             }
         }

@@ -165,7 +165,7 @@ public class CouponServiceImpl implements CouponService {
             map.put(allCouponRuleVo.getId(), goodIdList);
         }
         /**
-         * map中已经装有couponRule的id和对应的goodsId
+         * map中已经装有couponRule的id和对应的goodsIds
          */
         /**
          * 用来存被选用的couponRule的id
@@ -175,9 +175,6 @@ public class CouponServiceImpl implements CouponService {
             List<Integer> goodIds = map.get(key);
             int flag = 0;
             for (Integer goodId1 : goodIds) {
-                if (flag == 1) {
-                    break;
-                }
                 for (Integer goodId2 : goodIdsList) {
                     if (goodId1.equals(goodId2)) {
                         couponRuleIds.add(key);
@@ -185,8 +182,14 @@ public class CouponServiceImpl implements CouponService {
                         break;
                     }
                 }
+                if (flag == 1) {
+                    break;
+                }
             }
         }
+        /**
+         * 说明没有可获得的coupon
+         */
         if (couponRuleIds.size() == 0) {
             return coupons;
         }
@@ -206,25 +209,30 @@ public class CouponServiceImpl implements CouponService {
 
         List<CouponPo> couponPos = new ArrayList<>();
         couponPos = couponDao.getCouponPoByCouponRuleId(couponRuleIdString);
+        List<CouponRulePo> couponRulePosByIds = couponRuleDao.getCouponRulePosByIds(couponRuleIdString);
+
+        /**
+         * 存放id，couponRule
+         */
+        HashMap<Integer, CouponRule> hashMap = new HashMap<>();
 
         for (CouponPo couponPo : couponPos) {
             Coupon coupon = new Coupon();
             FatherChildUtil.fatherToChild(couponPo, coupon);
-            coupons.add(coupon);
-        }
-        /**
-         * 此处已经获得coupon，但是它的couponRule属性还没有获得，下一步就是获取这个
-         */
-        List<CouponRulePo> couponRulePosByIds = couponRuleDao.getCouponRulePosByIds(couponRuleIdString);
-
-        for (Coupon coupon : coupons) {
             for (CouponRulePo couponRulePosById : couponRulePosByIds) {
-                if (couponRulePosById.getId().equals(coupon.getCouponRuleId())) {
+                if (couponRulePosById.getId().equals(couponPo.getCouponRuleId())) {
+                    if (hashMap.containsKey(couponRulePosById.getId())) {
+                        coupon.setCouponRule(hashMap.get(couponRulePosById.getId()));
+                    }
+
                     CouponRule couponRule = new CouponRule();
                     FatherChildUtil.fatherToChild(couponRulePosById, couponRule);
+                    couponRule.setCouponStrategy(JsonObjectUtil.getCouponStrategy(couponRule.getStrategy()));
                     coupon.setCouponRule(couponRule);
+                    break;
                 }
             }
+            coupons.add(coupon);
         }
         return coupons;
     }

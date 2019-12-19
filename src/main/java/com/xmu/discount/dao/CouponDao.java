@@ -40,8 +40,8 @@ public class CouponDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         couponPo.setGmtCreate(localDateTime);
         couponPo.setGmtModified(localDateTime);
-        boolean bool = couponMapper.addCouponPo(couponPo);
-        if (bool) {
+        Integer integer = couponMapper.addCouponPo(couponPo);
+        if (integer>0) {
             return couponPo;
         }
         return null;

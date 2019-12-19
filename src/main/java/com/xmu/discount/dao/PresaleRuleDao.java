@@ -31,8 +31,8 @@ public class PresaleRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         presaleRule.setGmtCreate(localDateTime);
         presaleRule.setGmtModified(localDateTime);
-        Boolean bool = presaleRuleMapper.addPresaleRule(presaleRule);
-        if (bool.equals(true)) {
+        Integer id = presaleRuleMapper.addPresaleRule(presaleRule);
+        if (id>0) {
             return presaleRule;
         }
         return null;
@@ -56,8 +56,8 @@ public class PresaleRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         presaleRule.setGmtModified(localDateTime);
         presaleRule.setGmtCreate(localDateTime);
-        Boolean bool = presaleRuleMapper.updatePresaleRuleById(presaleRule);
-        if (bool) {
+        Integer id1 = presaleRuleMapper.updatePresaleRuleById(presaleRule);
+        if (id1>0) {
             return presaleRule;
         }
         return null;

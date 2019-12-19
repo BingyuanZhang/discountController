@@ -27,14 +27,14 @@ public interface CouponRuleMapper {
      * @param id
      * @return
      */
-    public Boolean deleteCouponRulePoById(Integer id);
+    public Integer deleteCouponRulePoById(Integer id);
 
     /**
      * 更新CouponRule
      * @param couponRulePo
      * @return
      */
-    public Boolean updateCouponRulePo(CouponRulePo couponRulePo);
+    public Integer updateCouponRulePo(CouponRulePo couponRulePo);
     /**
      * 通过id查找CouponRule
      * @param id

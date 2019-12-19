@@ -22,7 +22,7 @@ public interface PresaleRuleMapper {
      * @param presaleRule
      * @return
      */
-    public Boolean addPresaleRule(PresaleRule presaleRule);
+    public Integer addPresaleRule(PresaleRule presaleRule);
 
     /**
      * 查找goodsId为所查的，的presaleRule
@@ -38,7 +38,7 @@ public interface PresaleRuleMapper {
      * @param presaleRule
      * @return
      */
-    public Boolean updatePresaleRuleById(PresaleRule presaleRule);
+    public Integer updatePresaleRuleById(PresaleRule presaleRule);
 
     /**
      * 通过id查找PresaleRule

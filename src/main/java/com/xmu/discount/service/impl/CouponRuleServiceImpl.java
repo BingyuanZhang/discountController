@@ -36,9 +36,9 @@ public class CouponRuleServiceImpl implements CouponRuleService {
      * @return
      */
     @Override
-    public Object deleteCouponRulePoById(Integer id) {
-        couponRuleDao.deleteCouponRulePoById(id);
-        return null;
+    public Integer deleteCouponRulePoById(Integer id) {
+        Integer id1 = couponRuleDao.deleteCouponRulePoById(id);
+        return id1;
     }
     /**
      * 通过id更新CouponRule

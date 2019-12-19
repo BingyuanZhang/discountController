@@ -88,6 +88,9 @@ public class PresaleRuleServiceImpl implements PresaleRuleService {
         PresaleRuleVo presaleRuleVo = new PresaleRuleVo();
         PresaleRule presaleRuleById = presaleRuleDao.findPresaleRuleById(id);
         GoodsPo goodsPoById = goodsDao.findGoodsPoById(presaleRuleById.getGoodsId());
+        if (presaleRuleById.equals(null)||goodsPoById.equals(null)) {
+            return null;
+        }
         presaleRuleVo.setGoodsPo(goodsPoById);
         presaleRuleVo.setPresaleRule(presaleRuleById);
         return presaleRuleVo;

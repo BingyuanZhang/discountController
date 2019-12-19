@@ -1,7 +1,9 @@
 package com.xmu.discount.controller;
 
 import com.xmu.discount.domain.PresaleRule;
+import com.xmu.discount.service.PresaleRuleService;
 import com.xmu.discount.service.impl.PresaleRuleServiceImpl;
+import com.xmu.discount.util.ResponseUtil;
 import com.xmu.discount.vo.PresaleRuleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ import java.util.List;
 public class PresaleRuleController {
 
     @Autowired
-    PresaleRuleServiceImpl presaleRuleService;
+    PresaleRuleService presaleRuleService;
 
     /**
      * 管理员根据条件查询预售信息
@@ -30,11 +32,11 @@ public class PresaleRuleController {
      * @return
      */
     @GetMapping("/presaleRules")
-    public List<PresaleRuleVo> getPresaleRuleVoByInf(@RequestParam("goodsId") Integer goodsId,
+    public Object getPresaleRuleVoByInf(@RequestParam("goodsId") Integer goodsId,
                                                      @RequestParam("page") Integer page,
                                                      @RequestParam("limit") Integer limit) {
         List<PresaleRuleVo> presaleRuleVos = presaleRuleService.findPresaleRuleVosByGoodsId(goodsId, page, limit);
-        return presaleRuleVos;
+        return ResponseUtil.ok(presaleRuleVos);
     }
 
     /**
@@ -46,6 +48,9 @@ public class PresaleRuleController {
     @PostMapping("/presaleRules")
     public PresaleRule addPresaleRule(@RequestBody PresaleRule presaleRule) {
         PresaleRule presaleRule1 = presaleRuleService.addPresaleRule(presaleRule);
+        if (presaleRule1.equals(null)) {
+            ResponseUtil.presaleInsertFail();
+        }
         return presaleRule1;
     }
 
@@ -59,6 +64,9 @@ public class PresaleRuleController {
     @PutMapping("/presaleRules/{id}")
     public PresaleRule updatePresaleRuleById(@PathVariable Integer id, @RequestBody PresaleRule presaleRule) {
         PresaleRule presaleRule1 = presaleRuleService.updatePresaleRuleById(id, presaleRule);
+        if (presaleRule1.equals(null)) {
+            ResponseUtil.presaleUpdateFail();
+        }
         return presaleRule1;
     }
 
@@ -71,6 +79,9 @@ public class PresaleRuleController {
     @GetMapping("/presaleRules/{id}")
     public PresaleRuleVo getPresaleRuleVoById(@PathVariable Integer id) {
         PresaleRuleVo presaleRuleVoById = presaleRuleService.findPresaleRuleVoById(id);
+        if (presaleRuleVoById.equals(null)) {
+            ResponseUtil.presaleRuleUnknown();
+        }
         return presaleRuleVoById;
     }
 }

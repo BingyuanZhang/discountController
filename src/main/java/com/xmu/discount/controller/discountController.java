@@ -2,8 +2,8 @@ package com.xmu.discount.controller;
 
 import com.xmu.discount.domain.*;
 import com.xmu.discount.service.CouponRuleService;
-import com.xmu.discount.service.impl.CouponRuleServiceImpl;
-import com.xmu.discount.service.impl.CouponServiceImpl;
+import com.xmu.discount.service.CouponService;
+import com.xmu.discount.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ import java.util.List;
 public class discountController {
     private static final Logger logger = LoggerFactory.getLogger(discountController.class);
     @Autowired
-    public CouponServiceImpl couponService;
+    public CouponService couponService;
     @Autowired
-    public CouponRuleServiceImpl couponRuleService;
+    public CouponRuleService couponRuleService;
 
 
     /**
@@ -33,18 +33,18 @@ public class discountController {
      * @return
      */
     @GetMapping("/admin/couponRules")
-    public List<CouponRulePo> adminGetAllCouponRulePos(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+    public Object adminGetAllCouponRulePos(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         List<CouponRulePo> couponRulePos = couponRuleService.adminGetAllCouponRulePos(page, limit);
-        return couponRulePos;
+        return ResponseUtil.ok(couponRulePos);
     }
 
     /**
      * 普通用户查看优惠券
      */
     @GetMapping("/couponRules")
-    public List<CouponRulePo> userGetAllCouponRulePos(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+    public Object userGetAllCouponRulePos(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         List<CouponRulePo> couponRulePos = couponRuleService.userGetAllCouponRulePos(page, limit);
-        return couponRulePos;
+        return ResponseUtil.ok(couponRulePos);
     }
 
 
@@ -52,22 +52,27 @@ public class discountController {
      * 添加优惠券规则
      */
     @PostMapping("/couponRules")
-    public CouponRulePo addCouponRulePo(@RequestBody CouponRulePo couponRulePo) {
+    public Object addCouponRulePo(@RequestBody CouponRulePo couponRulePo) {
         if (couponRulePo == null) {
-            System.out.println("错误！！！");
+            return ResponseUtil.couponRuleAddFail();
         }
-
         CouponRulePo couponRulePo1 = couponRuleService.addCouponRulePo(couponRulePo);
-        return couponRulePo1;
+        if (couponRulePo1.equals(false)) {
+            return ResponseUtil.couponRuleAddFail();
+        }
+        return ResponseUtil.ok(couponRulePo1);
     }
 
     /**
      * 查看一种优惠券规则
      */
     @GetMapping("/couponRules/{id}")
-    public CouponRulePo findCouponRule(@PathVariable Integer id) throws Exception {
+    public Object findCouponRule(@PathVariable Integer id) throws Exception {
         CouponRulePo couponRulePoById = couponRuleService.findCouponRulePoById(id);
-        return couponRulePoById;
+        if (couponRulePoById.equals(null)) {
+            return ResponseUtil.invaildCouponRuleFail();
+        }
+        return ResponseUtil.ok(couponRulePoById);
 
     }
 
@@ -75,9 +80,12 @@ public class discountController {
      * 修改优惠券规则
      */
     @PutMapping("/couponRules/{id}")
-    public CouponRulePo updateCouponRule(@PathVariable Integer id, @RequestBody CouponRulePo couponRulePo) {
+    public Object updateCouponRule(@PathVariable Integer id, @RequestBody CouponRulePo couponRulePo) {
         CouponRulePo couponRulePo1 = couponRuleService.updateCouponRulePo(id, couponRulePo);
-        return couponRulePo1;
+        if (couponRulePo1.equals(null)) {
+            return ResponseUtil.couponRuleUpdateFail();
+        }
+        return ResponseUtil.ok(couponRulePo1);
 
     }
 
@@ -85,8 +93,12 @@ public class discountController {
      * 删除一种优惠券规则
      */
     @DeleteMapping("/couponRules/{id}")
-    public void deleteCouponRulePo(@PathVariable Integer id) {
-        couponRuleService.deleteCouponRulePoById(id);
+    public Object deleteCouponRulePo(@PathVariable Integer id) {
+        Integer id1 = couponRuleService.deleteCouponRulePoById(id);
+        if (id1.equals(null)) {
+            return ResponseUtil.couponRuleDeleteFail();
+        }
+        return ResponseUtil.ok();
     }
 
 
@@ -94,16 +106,19 @@ public class discountController {
      * 获取特定类型的的优惠券
      */
     @GetMapping("/coupons")
-    public List<Coupon> getAllCoupons(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, @RequestParam("showType") Integer showType) throws Exception {
+    public Object getAllCoupons(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, @RequestParam("showType") Integer showType) throws Exception {
         List<Coupon> Coupons = couponService.getAllStatusCoupons(page, limit, showType);
-        return Coupons;
+        return ResponseUtil.ok(Coupons);
     }
 
 
     @PostMapping("/coupons")
     public Object addCoupon(@RequestBody CouponPo couponPo) {
         CouponPo couponPo1 = couponService.addCouponPo(couponPo);
-        return couponPo1;
+        if (couponPo1.equals(null)) {
+            return ResponseUtil.getCouponFail();
+        }
+        return ResponseUtil.ok(couponPo1);
     }
 
     /**
@@ -115,7 +130,7 @@ public class discountController {
     @GetMapping("/coupons/availableCoupons")
     public Object getAvailableCoupons(@RequestBody List<CartItem> cartItemList) throws Exception {
         List<Coupon> availableCoupons = couponService.getAvailableCoupons(cartItemList);
-        return availableCoupons;
+        return ResponseUtil.ok(availableCoupons);
     }
 
 
