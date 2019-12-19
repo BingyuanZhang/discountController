@@ -43,7 +43,7 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public CouponPo addCouponPo(CouponPo couponPo) {
         CouponPo couponPo1 = couponDao.addCouponPo(couponPo);
-            return couponPo1;
+        return couponPo1;
     }
 
     /**
@@ -72,24 +72,38 @@ public class CouponServiceImpl implements CouponService {
     }
 
     /**
-     * 获取所有优惠券
+     * 获取所有特定状态优惠券
      *
      * @return
      */
     @Override
-    public List<Coupon> getAllCoupons() throws Exception {
-        List<CouponPo> allCouponPos = couponDao.getAllCouponPos();
-        List<Coupon> allCoupons = new ArrayList<>();
-        for (CouponPo couponPo : allCouponPos) {
+    public List<Coupon> getAllStatusCoupons(Integer page, Integer limit, Integer showType) throws Exception {
+        List<CouponPo> couponPos = couponDao.getAllStatusCouponPos(page, limit, showType);
+        String couponRuleIdString = "(";
+        for (int i = 0; i < couponPos.size(); i++) {
+            CouponPo couponPo = couponPos.get(i);
+            couponRuleIdString=couponRuleIdString+couponPo.getCouponRuleId();
+            if (i!=couponPos.size()-1) {
+                couponRuleIdString=couponRuleIdString+",";
+            }
+        }
+        couponRuleIdString=couponRuleIdString+")";
+        List<CouponRulePo> couponRulePos = couponRuleDao.getCouponRulePosByIds(couponRuleIdString);
+
+
+        List<Coupon> Coupons = new ArrayList<>();
+        for (CouponPo couponPo : couponPos) {
             Coupon coupon = new Coupon();
             FatherChildUtil.fatherToChild(couponPo, coupon);
-            allCoupons.add(coupon);
+
+            Coupons.add(coupon);
         }
-        return allCoupons;
+        return Coupons;
     }
 
     /**
      * 获取可用的优惠券
+     *
      * @param cartItemList
      * @return
      */
@@ -118,11 +132,11 @@ public class CouponServiceImpl implements CouponService {
          */
         List<CouponRuleVo> allCouponRuleVos = couponRuleDao.getAllCouponRuleVos();
 
-        HashMap<Integer,List<Integer>> map = new HashMap<Integer, List<Integer>>(allCouponRuleVos.size());
+        HashMap<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(allCouponRuleVos.size());
         for (CouponRuleVo allCouponRuleVo : allCouponRuleVos) {
             String goodsIdList1 = allCouponRuleVo.getGoodsList1();
             String goodsIdList2 = allCouponRuleVo.getGoodsList2();
-            List<Integer> goodIdList= new ArrayList<Integer>();
+            List<Integer> goodIdList = new ArrayList<Integer>();
             String[] array = new String[5000];
             array = goodsIdList1.split(",");
             for (String s : array) {
@@ -132,7 +146,7 @@ public class CouponServiceImpl implements CouponService {
             for (String s : array) {
                 goodIdList.add(Integer.valueOf(s));
             }
-            map.put(allCouponRuleVo.getId(),goodIdList);
+            map.put(allCouponRuleVo.getId(), goodIdList);
         }
         /**
          * map中已经装有couponRule的id和对应的goodsId
@@ -142,24 +156,23 @@ public class CouponServiceImpl implements CouponService {
          * 用来存被选用的couponRule的id
          */
         List<Integer> couponRuleIds = new ArrayList<>();
-        for(Integer key:map.keySet())
-        {
+        for (Integer key : map.keySet()) {
             List<Integer> goodIds = map.get(key);
-            int flag=0;
+            int flag = 0;
             for (Integer goodId1 : goodIds) {
-                if (flag==1) {
+                if (flag == 1) {
                     break;
                 }
                 for (Integer goodId2 : goodIdsList) {
                     if (goodId1.equals(goodId2)) {
                         couponRuleIds.add(key);
-                        flag=1;
+                        flag = 1;
                         break;
                     }
                 }
             }
         }
-        if (couponRuleIds.size()==0) {
+        if (couponRuleIds.size() == 0) {
             return coupons;
         }
 
@@ -171,19 +184,19 @@ public class CouponServiceImpl implements CouponService {
         String couponRuleIdString = "(";
         for (int i = 0; i < couponRuleIds.size(); i++) {
             Integer couponRuleId = couponRuleIds.get(i);
-            couponRuleIdString = couponRuleIdString+"'"+couponRuleId+"'";
-            if (i!=couponRuleIds.size()-1) {
-                couponRuleIdString=couponRuleIdString+",";
+            couponRuleIdString = couponRuleIdString + "'" + couponRuleId + "'";
+            if (i != couponRuleIds.size() - 1) {
+                couponRuleIdString = couponRuleIdString + ",";
             }
         }
-        couponRuleIdString=couponRuleIdString+")";
+        couponRuleIdString = couponRuleIdString + ")";
 
         List<CouponPo> couponPos = new ArrayList<>();
         couponPos = couponDao.getCouponPoByCouponRuleId(couponRuleIdString);
 
         for (CouponPo couponPo : couponPos) {
             Coupon coupon = new Coupon();
-            FatherChildUtil.fatherToChild(couponPo,coupon);
+            FatherChildUtil.fatherToChild(couponPo, coupon);
             coupons.add(coupon);
         }
 
@@ -195,9 +208,9 @@ public class CouponServiceImpl implements CouponService {
 
         for (Coupon coupon : coupons) {
             for (CouponRulePo couponRulePosById : couponRulePosByIds) {
-                if (couponRulePosById.getId().equals(coupon.getCouponRuleId())){
+                if (couponRulePosById.getId().equals(coupon.getCouponRuleId())) {
                     CouponRule couponRule = new CouponRule();
-                    FatherChildUtil.fatherToChild(couponRulePosById,couponRule);
+                    FatherChildUtil.fatherToChild(couponRulePosById, couponRule);
                     coupon.setCouponRule(couponRule);
                     couponRulePosByIds.remove(couponRulePosById);
                 }

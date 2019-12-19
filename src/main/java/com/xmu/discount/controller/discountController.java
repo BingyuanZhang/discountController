@@ -26,7 +26,8 @@ public class discountController {
 
 
     /**
-     * 管理员查看优惠券列表
+     * 管理员查看部分优惠券列表
+     *
      * @param page
      * @param limit
      * @return
@@ -34,6 +35,15 @@ public class discountController {
     @GetMapping("/admin/couponRules")
     public List<CouponRulePo> adminGetAllCouponRulePos(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         List<CouponRulePo> couponRulePos = couponRuleService.adminGetAllCouponRulePos(page, limit);
+        return couponRulePos;
+    }
+
+    /**
+     * 普通用户查看优惠券
+     */
+    @GetMapping("/couponRules")
+    public List<CouponRulePo> userGetAllCouponRulePos(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        List<CouponRulePo> couponRulePos = couponRuleService.userGetAllCouponRulePos(page, limit);
         return couponRulePos;
     }
 
@@ -79,25 +89,15 @@ public class discountController {
         couponRuleService.deleteCouponRulePoById(id);
     }
 
-    /**
-     * 普通用户查看优惠券
-     */
-    @GetMapping("/couponRules")
-    public List<CouponRulePo> getAllCouponRules(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
-
-    }
-
-
 
     /**
-     * 获取所有的优惠券
+     * 获取特定类型的的优惠券
      */
     @GetMapping("/coupons")
-    public List<Coupon> getAllCoupons() throws Exception {
-        List<Coupon> allCoupons = couponService.getAllCoupons();
-        return allCoupons;
+    public List<Coupon> getAllCoupons(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, @RequestParam("showType") Integer showType) throws Exception {
+        List<Coupon> Coupons = couponService.getAllStatusCoupons(page, limit, showType);
+        return Coupons;
     }
-
 
 
     @PostMapping("/coupons")
@@ -108,6 +108,7 @@ public class discountController {
 
     /**
      * 获取可用的优惠券
+     *
      * @param cartItemList
      * @return
      */

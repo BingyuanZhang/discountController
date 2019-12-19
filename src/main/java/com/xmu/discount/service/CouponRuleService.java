@@ -44,10 +44,18 @@ public interface CouponRuleService {
 
 
     /**
-     * 分页获取所有的优惠券规则
+     * 管理员分页获取部分的优惠券规则
      * @param page
      * @param limit
      * @return
      */
     public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit);
+
+    /**
+     * 用户分页获取部分的优惠券规则
+     * @param page
+     * @param limit
+     * @return
+     */
+    public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit);
 }

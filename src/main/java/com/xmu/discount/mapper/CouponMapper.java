@@ -40,10 +40,10 @@ public interface CouponMapper {
     public Coupon findCouponById(Integer id);
 
     /**
-     * 获取所有的优惠券
+     * 获取所有特定类型的优惠券
      * @return
      */
-    public List<CouponPo> getAllCouponPos();
+    public List<CouponPo> getAllStatusCouponPos(Integer showType);
 
     /**
      * 查找couponRuleId在给出的list(已经转为String)中的couponPo

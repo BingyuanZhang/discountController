@@ -6,6 +6,7 @@ import com.xmu.discount.domain.vo.CouponRuleVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**Mapper接口，用于和数据库交互
@@ -42,7 +43,7 @@ public interface CouponRuleMapper {
     public CouponRulePo findCouponRulePoById(Integer id);
 
     /**
-     *  管理员查看规则列表
+     *  查看部分规则列表
      * @return
      */
     public List<CouponRulePo> adminGetAllCouponRulePos();
@@ -59,4 +60,11 @@ public interface CouponRuleMapper {
      * @return
      */
     public List<CouponRulePo> getCouponRulePosByIds(String couponRuleIdString);
+
+    /**
+     * 用户分页查找优惠券规则
+     * @param localDateTime
+     * @return
+     */
+    public List<CouponRulePo> userGetAllCouponRulePos(LocalDateTime localDateTime);
 }

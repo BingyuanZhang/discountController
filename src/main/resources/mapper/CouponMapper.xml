@@ -40,13 +40,13 @@
             <if test="gmtCreate!=null">gmt_create=#{gmtCreate},</if>
             <if test="gmtModified!=null">gmt_modified=#{gmtModified},</if>
             <if test="beDelete!=null">is_delete=#{beDelete},</if>
-            <if test="statusCode!=null">status=#{status},</if>
+            <if test="statusCode!=null">status=#{statusCode},</if>
         </trim>
         WHERE id=#{id}
     </update>
 
-    <select id="getAllCouponPos" resultType="couponPo">
-        select * from oomall_coupon
+    <select id="getAllStatusCouponPos" parameterType="Integer" resultType="couponPo">
+        select * from oomall_coupon where status=#{showType}
     </select>
 
     <select id="getCouponPoByCouponRuleId" parameterType="Integer" resultType="couponPo">

@@ -79,13 +79,26 @@ public class CouponRuleDao {
     }
 
     /**
-     * 管理员查看规则列表
+     * 管理员查看部分规则列表
      *
      * @return
      */
     public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         List<CouponRulePo> CouponRulePos = couponRuleMapper.adminGetAllCouponRulePos();
+        return CouponRulePos;
+    }
+
+
+    /**
+     * 用户查看部分规则列表
+     *
+     * @return
+     */
+    public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        List<CouponRulePo> CouponRulePos = couponRuleMapper.userGetAllCouponRulePos(localDateTime);
         return CouponRulePos;
     }
 
@@ -109,4 +122,6 @@ public class CouponRuleDao {
         List<CouponRulePo> couponRulePosByIds = couponRuleMapper.getCouponRulePosByIds(couponRuleIdString);
         return couponRulePosByIds;
     }
+
+
 }

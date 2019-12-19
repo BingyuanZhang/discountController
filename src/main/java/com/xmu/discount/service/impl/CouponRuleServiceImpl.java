@@ -65,7 +65,7 @@ public class CouponRuleServiceImpl implements CouponRuleService {
 
 
     /**
-     * 管理员分页获取所有的优惠券规则
+     * 管理员分页获取部分的优惠券规则
      * @param page
      * @param limit
      * @return
@@ -73,6 +73,18 @@ public class CouponRuleServiceImpl implements CouponRuleService {
     @Override
     public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit) {
         List<CouponRulePo> allCouponRulePos = couponRuleDao.adminGetAllCouponRulePos(page, limit);
+        return allCouponRulePos;
+    }
+
+    /**
+     * 用户分页获取部分优惠券规则
+     * @param page
+     * @param limit
+     * @return
+     */
+    @Override
+    public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit) {
+        List<CouponRulePo> allCouponRulePos = couponRuleDao.userGetAllCouponRulePos(page, limit);
         return allCouponRulePos;
     }
 }

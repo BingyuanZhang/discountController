@@ -1,5 +1,6 @@
 package com.xmu.discount.dao;
 
+import com.github.pagehelper.PageHelper;
 import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponPo;
 import com.xmu.discount.mapper.CouponMapper;
@@ -75,9 +76,10 @@ public class CouponDao {
      *
      * @return
      */
-    public List<CouponPo> getAllCouponPos() {
-        List<CouponPo> allCouponPos = couponMapper.getAllCouponPos();
-        return allCouponPos;
+    public List<CouponPo> getAllStatusCouponPos(Integer page, Integer limit, Integer showType) {
+        PageHelper.startPage(page, limit);
+        List<CouponPo> CouponPos = couponMapper.getAllStatusCouponPos(showType);
+        return CouponPos;
     }
 
     public List<CouponPo> getCouponPoByCouponRuleId(String couponRuleIdString) {

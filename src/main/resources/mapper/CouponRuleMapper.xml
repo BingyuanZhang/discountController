@@ -64,12 +64,16 @@
         select * from oomall_coupon_rule where is_deleted=0
     </select>
 
+    <select id="userGetAllCouponRulePos" parameterType="LocalDateTime" resultType="couponRulePo" >
+        select * from oomall_coupon_rule where is_deleted=0 and end_time>#{localDateTime} and #{localDateTime}>begin_time
+    </select>
+
     <select id="getAllCouponRuleVos" resultType="couponRuleVo">
         select id,goods_list1,goods_list2 from oomall_coupon_rule where is_deleted=0
     </select>
 
 
-    <select id="findCouponRulePoByIds" parameterType="String" resultType="couponRulePo">
-        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted from oomall_coupon_rule where id in #{getCouponRulePosById} and is_deleted=0
+    <select id="getCouponRulePosByIds" parameterType="String" resultType="couponRulePo">
+        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted from oomall_coupon_rule where id in #{couponRuleIdString} and is_deleted=0
     </select>
 </mapper>

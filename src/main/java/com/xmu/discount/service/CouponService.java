@@ -45,7 +45,7 @@ public interface CouponService {
      * 获取所有优惠券
      * @return
      */
-    public List<Coupon> getAllCoupons() throws Exception;
+    public List<Coupon> getAllStatusCoupons(Integer page, Integer limit, Integer showType) throws Exception;
 
     /**
      * 获取可用的优惠券
