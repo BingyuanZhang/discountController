@@ -18,7 +18,7 @@
         <result column="gmt_modified" property="gmtModified"/>
         <result column="is_deleted" property="beDelete"/>
     </resultMap>
-    <resultMap id="couponRuleVo" type="com.xmu.discount.domain.vo.CouponRuleVo">
+    <resultMap id="couponRuleVo" type="com.xmu.discount.discountDo.CouponRuleDo">
         <id column="id" property="id"/>
         <result column="goods_list1" property="goodsList1"/>
         <result column="goods_list2" property="goodsList2"/>

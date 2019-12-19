@@ -1,9 +1,8 @@
 package com.xmu.discount.dao;
 
 import com.github.pagehelper.PageHelper;
-import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
-import com.xmu.discount.domain.vo.CouponRuleVo;
+import com.xmu.discount.discountDo.CouponRuleDo;
 import com.xmu.discount.mapper.CouponRuleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -119,9 +118,9 @@ public class CouponRuleDao {
      *
      * @return
      */
-    public List<CouponRuleVo> getAllCouponRuleVos() {
-        List<CouponRuleVo> allCouponRuleVos = couponRuleMapper.getAllCouponRuleVos();
-        return allCouponRuleVos;
+    public List<CouponRuleDo> getAllCouponRuleVos() {
+        List<CouponRuleDo> allCouponRuleDos = couponRuleMapper.getAllCouponRuleVos();
+        return allCouponRuleDos;
     }
 
     /**

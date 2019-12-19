@@ -29,8 +29,8 @@ public class PresaleRuleServiceImpl implements PresaleRuleService {
     /**
      * 数据库中增加一个PresaleRule
      *
-     * @param presaleRule
-     * @return PresaleRule
+     * @param presaleRule 预售规则
+     * @return PresaleRule 预售规则
      */
     @Override
     public PresaleRule addPresaleRule(PresaleRule presaleRule) {
@@ -41,10 +41,10 @@ public class PresaleRuleServiceImpl implements PresaleRuleService {
     /**
      * 通过goodsId获取presaleRules
      *
-     * @param goodsId
-     * @param page
-     * @param limit
-     * @return
+     * @param goodsId 商品ID
+     * @param page 页数
+     * @param limit 分页大小
+     * @return List<PresaleRuleVo>
      */
     @Override
     public List<PresaleRuleVo> findPresaleRuleVosByGoodsId(Integer goodsId, Integer page, Integer limit) {
@@ -68,7 +68,7 @@ public class PresaleRuleServiceImpl implements PresaleRuleService {
     /**
      * 修改预售信息
      *
-     * @param id
+     * @param id 预售规则ID
      * @param presaleRule
      * @return
      */
@@ -80,8 +80,8 @@ public class PresaleRuleServiceImpl implements PresaleRuleService {
 
     /**
      * 通过id获得PresaleRuleVo
-     * @param id
-     * @return
+     * @param id 预售规则ID
+     * @return PresaleVo
      */
     @Override
     public PresaleRuleVo findPresaleRuleVoById(Integer id) {

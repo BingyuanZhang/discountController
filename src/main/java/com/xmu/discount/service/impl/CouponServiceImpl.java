@@ -3,7 +3,7 @@ package com.xmu.discount.service.impl;
 import com.xmu.discount.dao.CouponDao;
 import com.xmu.discount.dao.CouponRuleDao;
 import com.xmu.discount.domain.*;
-import com.xmu.discount.domain.vo.CouponRuleVo;
+import com.xmu.discount.discountDo.CouponRuleDo;
 import com.xmu.discount.service.CouponService;
 import com.xmu.discount.util.FatherChildUtil;
 import com.xmu.discount.util.JsonObjectUtil;
@@ -146,12 +146,12 @@ public class CouponServiceImpl implements CouponService {
         /**
          *获取所有的couponRule的id和goodIdList
          */
-        List<CouponRuleVo> allCouponRuleVos = couponRuleDao.getAllCouponRuleVos();
+        List<CouponRuleDo> allCouponRuleDos = couponRuleDao.getAllCouponRuleVos();
 
-        HashMap<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(allCouponRuleVos.size());
-        for (CouponRuleVo allCouponRuleVo : allCouponRuleVos) {
-            String goodsIdList1 = allCouponRuleVo.getGoodsList1();
-            String goodsIdList2 = allCouponRuleVo.getGoodsList2();
+        HashMap<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(allCouponRuleDos.size());
+        for (CouponRuleDo allCouponRuleDo : allCouponRuleDos) {
+            String goodsIdList1 = allCouponRuleDo.getGoodsList1();
+            String goodsIdList2 = allCouponRuleDo.getGoodsList2();
             List<Integer> goodIdList = new ArrayList<Integer>();
             String[] array = new String[5000];
             array = goodsIdList1.split(",");
@@ -162,7 +162,7 @@ public class CouponServiceImpl implements CouponService {
             for (String s : array) {
                 goodIdList.add(Integer.valueOf(s));
             }
-            map.put(allCouponRuleVo.getId(), goodIdList);
+            map.put(allCouponRuleDo.getId(), goodIdList);
         }
         /**
          * map中已经装有couponRule的id和对应的goodsIds

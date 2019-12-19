@@ -1,12 +1,10 @@
 package com.xmu.discount.mapper;
 
-import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
-import com.xmu.discount.domain.vo.CouponRuleVo;
+import com.xmu.discount.discountDo.CouponRuleDo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**Mapper接口，用于和数据库交互
@@ -52,7 +50,7 @@ public interface CouponRuleMapper {
      * 获得CouponRule的id和goodsListn
      * @return
      */
-    public List<CouponRuleVo> getAllCouponRuleVos();
+    public List<CouponRuleDo> getAllCouponRuleVos();
 
     /**
      * 通过多个id获取多个couponRule

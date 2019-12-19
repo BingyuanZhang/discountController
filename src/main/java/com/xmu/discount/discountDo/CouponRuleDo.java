@@ -1,4 +1,4 @@
-package com.xmu.discount.domain.vo;
+package com.xmu.discount.discountDo;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import org.apache.ibatis.type.Alias;
 @ToString
 @EqualsAndHashCode
 @Alias("couponRuleVo")
-public class CouponRuleVo {
+public class CouponRuleDo {
     Integer id;
     /**
      * 存放适用于本优惠券规则的所有商品ID
