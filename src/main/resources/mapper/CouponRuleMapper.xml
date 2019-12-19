@@ -64,8 +64,8 @@
         select * from oomall_coupon_rule where is_deleted=0
     </select>
 
-    <select id="userGetAllCouponRulePos" parameterType="LocalDateTime" resultType="couponRulePo" >
-        select * from oomall_coupon_rule where is_deleted=0 and end_time>#{localDateTime} and #{localDateTime}>begin_time
+    <select id="userGetAllCouponRulePos"  resultType="couponRulePo" >
+        select * from oomall_coupon_rule where is_deleted=0
     </select>
 
     <select id="getAllCouponRuleVos" resultType="couponRuleVo">

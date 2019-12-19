@@ -63,8 +63,7 @@ public interface CouponRuleMapper {
 
     /**
      * 用户分页查找优惠券规则
-     * @param localDateTime
      * @return
      */
-    public List<CouponRulePo> userGetAllCouponRulePos(LocalDateTime localDateTime);
+    public List<CouponRulePo> userGetAllCouponRulePos();
 }

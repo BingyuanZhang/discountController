@@ -98,7 +98,12 @@ public class CouponRuleDao {
     public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         LocalDateTime localDateTime = LocalDateTime.now();
-        List<CouponRulePo> CouponRulePos = couponRuleMapper.userGetAllCouponRulePos(localDateTime);
+        List<CouponRulePo> CouponRulePos = couponRuleMapper.userGetAllCouponRulePos();
+        for (CouponRulePo couponRulePo : CouponRulePos) {
+            if (couponRulePo.getEndTime().isBefore(localDateTime)||couponRulePo.getBeginTime().isAfter(localDateTime)) {
+                CouponRulePos.remove(couponRulePo);
+            }
+        }
         return CouponRulePos;
     }
 
