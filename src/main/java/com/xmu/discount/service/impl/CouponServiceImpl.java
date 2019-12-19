@@ -6,6 +6,7 @@ import com.xmu.discount.domain.*;
 import com.xmu.discount.domain.vo.CouponRuleVo;
 import com.xmu.discount.service.CouponService;
 import com.xmu.discount.util.FatherChildUtil;
+import com.xmu.discount.util.JsonObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,27 +79,46 @@ public class CouponServiceImpl implements CouponService {
      */
     @Override
     public List<Coupon> getAllStatusCoupons(Integer page, Integer limit, Integer showType) throws Exception {
+        /**
+         * 获得特定类型的couponPo
+         */
         List<CouponPo> couponPos = couponDao.getAllStatusCouponPos(page, limit, showType);
         String couponRuleIdString = "(";
         for (int i = 0; i < couponPos.size(); i++) {
             CouponPo couponPo = couponPos.get(i);
-            couponRuleIdString=couponRuleIdString+couponPo.getCouponRuleId();
-            if (i!=couponPos.size()-1) {
-                couponRuleIdString=couponRuleIdString+",";
+            couponRuleIdString = couponRuleIdString + couponPo.getCouponRuleId();
+            if (i != couponPos.size() - 1) {
+                couponRuleIdString = couponRuleIdString + ",";
             }
         }
-        couponRuleIdString=couponRuleIdString+")";
+        couponRuleIdString = couponRuleIdString + ")";
+        /**
+         * 获得这些couponPo的couponRuleId,然后查到couponRulePo
+         */
         List<CouponRulePo> couponRulePos = couponRuleDao.getCouponRulePosByIds(couponRuleIdString);
+        List<CouponRule> couponRules = new ArrayList<>();
+        for (CouponRulePo couponRulePo : couponRulePos) {
+            CouponRule couponRule = new CouponRule();
+            FatherChildUtil.fatherToChild(couponRulePo,couponRule);
+            couponRule.setCouponStrategy(JsonObjectUtil.getCouponStrategy(couponRule.getStrategy()));
+            couponRules.add(couponRule);
+        }
 
 
-        List<Coupon> Coupons = new ArrayList<>();
+        List<Coupon> coupons = new ArrayList<>();
         for (CouponPo couponPo : couponPos) {
             Coupon coupon = new Coupon();
             FatherChildUtil.fatherToChild(couponPo, coupon);
 
-            Coupons.add(coupon);
+            for (CouponRule couponRule : couponRules) {
+                if (coupon.getCouponRuleId().equals(couponRule.getId())) {
+                    coupon.setCouponRule(couponRule);
+                    break;
+                }
+            }
+            coupons.add(coupon);
         }
-        return Coupons;
+        return coupons;
     }
 
     /**
@@ -109,9 +129,7 @@ public class CouponServiceImpl implements CouponService {
      */
     @Override
     public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList) throws Exception {
-
         List<Coupon> coupons = new ArrayList<>();
-
         /**
          *获得所有的good的id
          */
@@ -125,8 +143,6 @@ public class CouponServiceImpl implements CouponService {
         HashSet<Integer> goodIdsSet = new HashSet<>(goodIdsList);
         goodIdsList.clear();
         goodIdsList.addAll(goodIdsSet);
-
-
         /**
          *获取所有的couponRule的id和goodIdList
          */
@@ -151,7 +167,6 @@ public class CouponServiceImpl implements CouponService {
         /**
          * map中已经装有couponRule的id和对应的goodsId
          */
-
         /**
          * 用来存被选用的couponRule的id
          */
@@ -175,12 +190,10 @@ public class CouponServiceImpl implements CouponService {
         if (couponRuleIds.size() == 0) {
             return coupons;
         }
-
         /**
          * 此时couponRuleIds是所要的couponRule的Id
          * 接下来通过数据库查找没有被删除的，而且couponRuleId是我们要的，的coupon
          */
-
         String couponRuleIdString = "(";
         for (int i = 0; i < couponRuleIds.size(); i++) {
             Integer couponRuleId = couponRuleIds.get(i);
@@ -199,11 +212,9 @@ public class CouponServiceImpl implements CouponService {
             FatherChildUtil.fatherToChild(couponPo, coupon);
             coupons.add(coupon);
         }
-
         /**
          * 此处已经获得coupon，但是它的couponRule属性还没有获得，下一步就是获取这个
          */
-
         List<CouponRulePo> couponRulePosByIds = couponRuleDao.getCouponRulePosByIds(couponRuleIdString);
 
         for (Coupon coupon : coupons) {
@@ -212,12 +223,9 @@ public class CouponServiceImpl implements CouponService {
                     CouponRule couponRule = new CouponRule();
                     FatherChildUtil.fatherToChild(couponRulePosById, couponRule);
                     coupon.setCouponRule(couponRule);
-                    couponRulePosByIds.remove(couponRulePosById);
                 }
             }
-
         }
-
         return coupons;
     }
 }
