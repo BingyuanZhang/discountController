@@ -9,6 +9,7 @@ import com.xmu.discount.util.FatherChildUtil;
 import com.xmu.discount.util.JsonObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -42,7 +43,15 @@ public class CouponServiceImpl implements CouponService {
      * @return
      */
     @Override
+    @Transactional
     public CouponPo addCouponPo(CouponPo couponPo) {
+        CouponRulePo couponRulePo = new CouponRulePo();
+        couponRulePo = couponRuleDao.findCouponRulePoById(couponPo.getCouponRuleId());
+        if (couponRulePo.equals(null)) {
+            return null;
+        }
+        couponRulePo.setCollectedNum(couponRulePo.getCollectedNum() + 1);
+        couponRuleDao.updateCouponRulePo(couponRulePo.getId(),couponRulePo);
         CouponPo couponPo1 = couponDao.addCouponPo(couponPo);
         return couponPo1;
     }
@@ -99,7 +108,7 @@ public class CouponServiceImpl implements CouponService {
         List<CouponRule> couponRules = new ArrayList<>();
         for (CouponRulePo couponRulePo : couponRulePos) {
             CouponRule couponRule = new CouponRule();
-            FatherChildUtil.fatherToChild(couponRulePo,couponRule);
+            FatherChildUtil.fatherToChild(couponRulePo, couponRule);
             couponRule.setCouponStrategy(JsonObjectUtil.getCouponStrategy(couponRule.getStrategy()));
             couponRules.add(couponRule);
         }

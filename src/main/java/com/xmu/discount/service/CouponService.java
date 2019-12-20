@@ -3,6 +3,7 @@ package com.xmu.discount.service;
 import com.xmu.discount.domain.CartItem;
 import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponPo;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public interface CouponService {
      * @param couponPo
      * @return
      */
+    @Transactional
     public CouponPo addCouponPo(CouponPo couponPo);
 
     /**

@@ -1,7 +1,6 @@
 package com.xmu.discount.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xmu.discount.util.couponStrategy.PercentageStrategy;
 import com.xmu.discount.util.couponStrategy.includeName.CashOffStrategyName;
 import com.xmu.discount.util.couponStrategy.OnlyNameAndObj;
 import com.xmu.discount.util.couponStrategy.includeName.NumberStrategyName;

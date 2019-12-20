@@ -17,8 +17,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/discount", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-public class discountController {
-    private static final Logger logger = LoggerFactory.getLogger(discountController.class);
+public class DiscountController {
+    private static final Logger logger = LoggerFactory.getLogger(DiscountController.class);
     @Autowired
     public CouponService couponService;
     @Autowired
@@ -112,6 +112,11 @@ public class discountController {
     }
 
 
+    /**
+     *增加优惠券
+     * @param couponPo
+     * @return
+     */
     @PostMapping("/coupons")
     public Object addCoupon(@RequestBody CouponPo couponPo) {
         CouponPo couponPo1 = couponService.addCouponPo(couponPo);
@@ -127,7 +132,7 @@ public class discountController {
      * @param cartItemList
      * @return
      */
-    @GetMapping("/coupons/availableCoupons")
+    @PostMapping("/coupons/availableCoupons")
     public Object getAvailableCoupons(@RequestBody List<CartItem> cartItemList) throws Exception {
         List<Coupon> availableCoupons = couponService.getAvailableCoupons(cartItemList);
         return ResponseUtil.ok(availableCoupons);
