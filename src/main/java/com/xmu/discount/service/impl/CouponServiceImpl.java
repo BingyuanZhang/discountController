@@ -276,12 +276,13 @@ public class CouponServiceImpl implements CouponService {
                 if (couponRulePosById.getId().equals(couponPo.getCouponRuleId())) {
                     if (hashMap.containsKey(couponRulePosById.getId())) {
                         coupon.setCouponRule(hashMap.get(couponRulePosById.getId()));
+                    } else {
+                        CouponRule couponRule = new CouponRule();
+                        FatherChildUtil.fatherToChild(couponRulePosById, couponRule);
+                        couponRule.setCouponStrategy(JsonObjectUtil.getCouponStrategy(couponRule.getStrategy()));
+                        hashMap.put(couponRule.getId(),couponRule);
+                        coupon.setCouponRule(couponRule);
                     }
-
-                    CouponRule couponRule = new CouponRule();
-                    FatherChildUtil.fatherToChild(couponRulePosById, couponRule);
-                    couponRule.setCouponStrategy(JsonObjectUtil.getCouponStrategy(couponRule.getStrategy()));
-                    coupon.setCouponRule(couponRule);
                     break;
                 }
             }
