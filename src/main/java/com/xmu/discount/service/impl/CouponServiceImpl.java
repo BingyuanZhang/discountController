@@ -155,7 +155,7 @@ public class CouponServiceImpl implements CouponService {
         /**
          *获取所有的couponRule的id和goodIdList
          */
-        List<CouponRuleDo> allCouponRuleDos = couponRuleDao.getAllCouponRuleVos();
+        List<CouponRuleDo> allCouponRuleDos = couponRuleDao.getAllCouponRuleDos();
 
         HashMap<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(allCouponRuleDos.size());
         for (CouponRuleDo allCouponRuleDo : allCouponRuleDos) {

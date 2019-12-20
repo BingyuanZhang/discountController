@@ -19,7 +19,7 @@ public interface CouponRuleMapper {
      * @param couponRulePo
      * @return
      */
-    public Boolean addCouponRulePo(CouponRulePo couponRulePo);
+    public Integer addCouponRulePo(CouponRulePo couponRulePo);
     /**
      * 根据id删除CouponRule
      * @param id
@@ -50,7 +50,7 @@ public interface CouponRuleMapper {
      * 获得CouponRule的id和goodsListn
      * @return
      */
-    public List<CouponRuleDo> getAllCouponRuleVos();
+    public List<CouponRuleDo> getAllCouponRuleDos();
 
     /**
      * 通过多个id获取多个couponRule

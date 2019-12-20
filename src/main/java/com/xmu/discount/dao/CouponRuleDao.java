@@ -29,8 +29,8 @@ public class CouponRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         couponRulePo.setGmtModified(localDateTime);
         couponRulePo.setGmtCreate(localDateTime);
-        boolean bool = couponRuleMapper.addCouponRulePo(couponRulePo);
-        if (bool) {
+        Integer id = couponRuleMapper.addCouponRulePo(couponRulePo);
+        if (id>0) {
             return couponRulePo;
         }
         return null;
@@ -118,8 +118,8 @@ public class CouponRuleDao {
      *
      * @return
      */
-    public List<CouponRuleDo> getAllCouponRuleVos() {
-        List<CouponRuleDo> allCouponRuleDos = couponRuleMapper.getAllCouponRuleVos();
+    public List<CouponRuleDo> getAllCouponRuleDos() {
+        List<CouponRuleDo> allCouponRuleDos = couponRuleMapper.getAllCouponRuleDos();
         return allCouponRuleDos;
     }
 

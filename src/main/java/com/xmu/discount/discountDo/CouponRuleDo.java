@@ -15,7 +15,7 @@ import org.apache.ibatis.type.Alias;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Alias("couponRuleVo")
+@Alias("couponRuleDo")
 public class CouponRuleDo {
     Integer id;
     /**

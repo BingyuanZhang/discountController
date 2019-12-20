@@ -18,7 +18,7 @@
         <result column="gmt_modified" property="gmtModified"/>
         <result column="is_deleted" property="beDelete"/>
     </resultMap>
-    <resultMap id="couponRuleVo" type="com.xmu.discount.discountDo.CouponRuleDo">
+    <resultMap id="couponRuleDo" type="com.xmu.discount.discountDo.CouponRuleDo">
         <id column="id" property="id"/>
         <result column="goods_list1" property="goodsList1"/>
         <result column="goods_list2" property="goodsList2"/>
@@ -30,7 +30,7 @@
     </select>
 
     <insert id="addCouponRulePo" parameterType="couponRulePo" useGeneratedKeys="true" keyProperty="id">
-        insert into oomall_coupon_rule(name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted)
+        insert into oomall_coupon_rule(name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified)
         values (#{name},#{brief},#{beginTime},#{endTime},#{picUrl},#{validPeriod},#{strategy}, #{total},#{collectedNum}, #{goodsList1}, #{goodsList2},#{gmtCreate},#{gmtModified})
     </insert>
 
@@ -68,7 +68,7 @@
         select * from oomall_coupon_rule where is_deleted=0
     </select>
 
-    <select id="getAllCouponRuleVos" resultType="couponRuleVo">
+    <select id="getAllCouponRuleDos" resultType="couponRuleDo">
         select id,goods_list1,goods_list2 from oomall_coupon_rule where is_deleted=0
     </select>
 
