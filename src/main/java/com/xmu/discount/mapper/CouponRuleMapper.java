@@ -60,17 +60,18 @@ public interface CouponRuleMapper {
      */
     public List<CouponRuleDo> getAllCouponRuleDos();
 
-    /**
-     * 通过多个id获取多个couponRule
-     * @param couponRuleIdString
-     * @return
-     */
-    public List<CouponRulePo> getCouponRulePosByIds(String couponRuleIdString);
 
     /**
      * 用户分页查找优惠券规则
      * @return
      */
     public List<CouponRulePo> userGetAllCouponRulePos();
+
+    /**
+     * 管理员下架优惠券规则
+     * @param id
+     * @return
+     */
+    public Integer adminUnShelveCouponRules(Integer id);
 
 }

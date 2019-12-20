@@ -44,7 +44,7 @@ public class CouponServiceImpl implements CouponService {
      * @return
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public CouponPo addCouponPo(CouponPo couponPo) {
         CouponRulePo couponRulePo = new CouponRulePo();
         couponRulePo = couponRuleDao.findCouponRulePoById(couponPo.getCouponRuleId());

@@ -94,4 +94,14 @@ public class CouponDao {
         return couponPoByCouponRuleId;
     }
 
+    /**
+     * 管理员下架所有优惠券规则下的优惠券
+     * @param couponRuleId
+     * @return
+     */
+    public Boolean adminUnShelveCoupons(Integer couponRuleId) {
+        Boolean bool = couponMapper.adminUnShelveCoupons(couponRuleId);
+        return bool;
+    }
+
 }

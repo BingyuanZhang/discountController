@@ -4,6 +4,7 @@ import com.xmu.discount.domain.CartItem;
 import com.xmu.discount.domain.Coupon;
 import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -58,4 +59,12 @@ public interface CouponRuleService {
      * @return
      */
     public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit);
+
+    /**
+     * 管理员下架优惠券规则
+     * @param id
+     * @return
+     */
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
+    public Boolean adminUnShelveCouponRules(Integer id);
 }

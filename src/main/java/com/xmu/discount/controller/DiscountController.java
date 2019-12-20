@@ -139,4 +139,12 @@ public class DiscountController {
     }
 
 
+    @PostMapping("/couponRules/{id}/invalid")
+    public Object adminUnShelveCouponRules(@PathVariable Integer id) {
+        Boolean bool = couponRuleService.adminUnShelveCouponRules(id);
+        if (!bool) {
+            return ResponseUtil.fail();
+        }
+        return ResponseUtil.ok();
+    }
 }

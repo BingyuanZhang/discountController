@@ -52,4 +52,11 @@ public interface CouponMapper {
      * @return
      */
     public List<CouponPo> getCouponPoByCouponRuleId( Integer couponRuleId );
+
+    /**
+     * 管理员下架优惠券规则下的所有优惠券
+     * @param couponRuleId
+     * @return
+     */
+    public Boolean adminUnShelveCoupons(Integer couponRuleId);
 }

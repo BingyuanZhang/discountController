@@ -21,11 +21,11 @@ public interface CouponService {
     public Coupon findCouponById(Integer id);
 
     /**
-     *增加Coupon对象
+     * 增加Coupon对象
      * @param couponPo
      * @return
      */
-    @Transactional
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public CouponPo addCouponPo(CouponPo couponPo);
 
     /**
@@ -44,8 +44,12 @@ public interface CouponService {
     public boolean deleteCouponById(Integer id);
 
     /**
-     * 获取所有优惠券
+     * 获取所有特定状态优惠券
+     * @param page
+     * @param limit
+     * @param showType
      * @return
+     * @throws Exception
      */
     public List<Coupon> getAllStatusCoupons(Integer page, Integer limit, Integer showType) throws Exception;
 
@@ -53,6 +57,7 @@ public interface CouponService {
      * 获取可用的优惠券
      * @param cartItemList
      * @return
+     * @throws Exception
      */
     public List<Coupon> getAvailableCoupons(List<CartItem> cartItemList) throws Exception;
 }

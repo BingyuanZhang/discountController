@@ -76,7 +76,7 @@ public class PresaleRuleController {
      * @param id
      * @return
      */
-    @GetMapping("/presaleRules/{id}")
+    @GetMapping("/admin/presaleRules/{id}")
     public Object getPresaleRuleVoById(@PathVariable Integer id) {
         PresaleRuleVo presaleRuleVoById = presaleRuleService.findPresaleRuleVoById(id);
         if (presaleRuleVoById.equals(null)) {
@@ -84,4 +84,6 @@ public class PresaleRuleController {
         }
         return ResponseUtil.ok(presaleRuleVoById);
     }
+
+
 }

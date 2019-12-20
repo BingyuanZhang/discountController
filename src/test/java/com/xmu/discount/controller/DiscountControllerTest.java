@@ -125,4 +125,10 @@ public class DiscountControllerTest {
     public void getAvailableCoupons() {
 
     }
+
+    @Test
+    public void adminUnShelveCouponRules() {
+        Object object = discountController.adminUnShelveCouponRules(253);
+        System.out.println(object);
+    }
 }

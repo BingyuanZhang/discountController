@@ -149,6 +149,9 @@ public class CouponRuleDao {
         return allCouponRuleDos;
     }
 
-
+    public Integer adminUnShelveCouponRules(Integer id) {
+        Integer integer = couponRuleMapper.adminUnShelveCouponRules(id);
+        return integer;
+    }
 
 }
