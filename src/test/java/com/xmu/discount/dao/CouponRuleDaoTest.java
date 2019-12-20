@@ -1,11 +1,9 @@
 package com.xmu.discount.dao;
 
-import com.xmu.discount.discountDo.CouponRuleDo;
+import com.xmu.discount.discountdo.CouponRuleDo;
 import com.xmu.discount.domain.CouponRulePo;
 import com.xmu.discount.mapper.CouponRuleMapper;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

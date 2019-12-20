@@ -2,9 +2,8 @@ package com.xmu.discount.service;
 
 import com.xmu.discount.dao.CouponDao;
 import com.xmu.discount.dao.CouponRuleDao;
-import com.xmu.discount.discountDo.CouponRuleDo;
+import com.xmu.discount.discountdo.CouponRuleDo;
 import com.xmu.discount.domain.CouponPo;
-import com.xmu.discount.service.impl.CouponServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

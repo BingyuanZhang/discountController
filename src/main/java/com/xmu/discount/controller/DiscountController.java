@@ -107,8 +107,8 @@ public class DiscountController {
      */
     @GetMapping("/coupons")
     public Object getAllCoupons(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, @RequestParam("showType") Integer showType) throws Exception {
-        List<Coupon> Coupons = couponService.getAllStatusCoupons(page, limit, showType);
-        return ResponseUtil.ok(Coupons);
+        List<Coupon> coupons = couponService.getAllStatusCoupons(page, limit, showType);
+        return ResponseUtil.ok(coupons);
     }
 
 

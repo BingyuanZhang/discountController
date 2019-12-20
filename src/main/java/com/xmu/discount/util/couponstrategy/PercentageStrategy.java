@@ -1,4 +1,4 @@
-package com.xmu.discount.util.couponStrategy;
+package com.xmu.discount.util.couponstrategy;
 
 import lombok.Getter;
 import lombok.Setter;

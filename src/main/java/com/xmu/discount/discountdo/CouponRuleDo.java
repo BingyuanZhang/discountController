@@ -1,4 +1,4 @@
-package com.xmu.discount.discountDo;
+package com.xmu.discount.discountdo;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

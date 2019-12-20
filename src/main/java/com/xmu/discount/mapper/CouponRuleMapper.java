@@ -1,7 +1,7 @@
 package com.xmu.discount.mapper;
 
 import com.xmu.discount.domain.CouponRulePo;
-import com.xmu.discount.discountDo.CouponRuleDo;
+import com.xmu.discount.discountdo.CouponRuleDo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

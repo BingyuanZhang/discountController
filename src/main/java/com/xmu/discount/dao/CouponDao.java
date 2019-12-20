@@ -79,8 +79,8 @@ public class CouponDao {
      */
     public List<CouponPo> getAllStatusCouponPos(Integer page, Integer limit, Integer showType) {
         PageHelper.startPage(page, limit);
-        List<CouponPo> CouponPos = couponMapper.getAllStatusCouponPos(showType);
-        return CouponPos;
+        List<CouponPo> couponPos = couponMapper.getAllStatusCouponPos(showType);
+        return couponPos;
     }
 
 

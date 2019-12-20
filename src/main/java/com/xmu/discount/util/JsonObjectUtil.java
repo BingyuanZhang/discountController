@@ -1,10 +1,11 @@
 package com.xmu.discount.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xmu.discount.util.couponStrategy.includeName.CashOffStrategyName;
-import com.xmu.discount.util.couponStrategy.OnlyNameAndObj;
-import com.xmu.discount.util.couponStrategy.includeName.NumberStrategyName;
-import com.xmu.discount.util.couponStrategy.includeName.PercentageStrategyName;
+import com.xmu.discount.util.couponstrategy.StrategyName;
+import com.xmu.discount.util.couponstrategy.includename.CashOffStrategyName;
+import com.xmu.discount.util.couponstrategy.OnlyNameAndObj;
+import com.xmu.discount.util.couponstrategy.includename.NumberStrategyName;
+import com.xmu.discount.util.couponstrategy.includename.PercentageStrategyName;
 
 /**
  * @author Zhang Bingyuan
@@ -28,14 +29,14 @@ public class JsonObjectUtil {
         /**
          * 根据名字创建对象
          */
-        if ("CashOffStrategy".equals(name)) {
+        if (StrategyName.CashOffStrategy.equals(name)) {
             CashOffStrategyName cashOffStrategyName = JSONObject.toJavaObject(jsonObject, CashOffStrategyName.class);
             strategy = cashOffStrategyName.getObj();
 
-        } else if ("NumberStrategy".equals(name)) {
+        } else if (StrategyName.NumberStrategy.equals(name)) {
             NumberStrategyName numberStrategyName = JSONObject.toJavaObject(jsonObject, NumberStrategyName.class);
             strategy = numberStrategyName.getObj();
-        } else if ("PercentageStrategy".equals(name)) {
+        } else if (StrategyName.PercentageStrategy.equals(name)) {
             PercentageStrategyName percentageStrategyName = JSONObject.toJavaObject(jsonObject, PercentageStrategyName.class);
             strategy = percentageStrategyName.getObj();
         } else {

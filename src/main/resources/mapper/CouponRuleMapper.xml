@@ -19,7 +19,7 @@
         <result column="is_deleted" property="beDeleted"/>
         <result column="status" property="statusCode"/>
     </resultMap>
-    <resultMap id="couponRuleDo" type="com.xmu.discount.discountDo.CouponRuleDo">
+    <resultMap id="couponRuleDo" type="com.xmu.discount.discountdo.CouponRuleDo">
 
         <id column="id" property="id"/>
         <result column="goods_list1" property="goodsList1"/>

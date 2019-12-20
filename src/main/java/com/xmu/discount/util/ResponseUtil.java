@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author Zhang Bingyuan & Liu Wenhan
  * 响应操作结果
  * <pre>
  *  {

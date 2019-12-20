@@ -1,6 +1,6 @@
-package com.xmu.discount.util.couponStrategy.includeName;
+package com.xmu.discount.util.couponstrategy.includename;
 
-import com.xmu.discount.util.couponStrategy.PercentageStrategy;
+import com.xmu.discount.util.couponstrategy.PercentageStrategy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

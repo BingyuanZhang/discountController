@@ -3,7 +3,7 @@ package com.xmu.discount.service.impl;
 import com.xmu.discount.dao.CouponDao;
 import com.xmu.discount.dao.CouponRuleDao;
 import com.xmu.discount.domain.*;
-import com.xmu.discount.discountDo.CouponRuleDo;
+import com.xmu.discount.discountdo.CouponRuleDo;
 import com.xmu.discount.service.CouponService;
 import com.xmu.discount.util.FatherChildUtil;
 import com.xmu.discount.util.JsonObjectUtil;
@@ -159,14 +159,14 @@ public class CouponServiceImpl implements CouponService {
             String[] array = new String[5000];
             array = goodsIdList1.split(",");
             for (String s : array) {
-                if (s.equals("")) {
+                if ("".equals(s)) {
                     continue;
                 }
                 goodIdList.add(Integer.valueOf(s));
             }
             array = goodsIdList2.split(",");
             for (String s : array) {
-                if (s.equals("")) {
+                if ("".equals(s)) {
                     continue;
                 }
                 goodIdList.add(Integer.valueOf(s));
@@ -267,7 +267,7 @@ public class CouponServiceImpl implements CouponService {
         /**
          * 存放id，couponRule
          */
-        HashMap<Integer, CouponRule> hashMap = new HashMap<>();
+        HashMap<Integer, CouponRule> hashMap = new HashMap<>(couponRulePosByIds.size());
 
         for (CouponPo couponPo : couponPos) {
             Coupon coupon = new Coupon();

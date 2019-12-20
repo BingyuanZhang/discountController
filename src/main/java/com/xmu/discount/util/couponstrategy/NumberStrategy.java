@@ -1,6 +1,5 @@
-package com.xmu.discount.util.couponStrategy;
+package com.xmu.discount.util.couponstrategy;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

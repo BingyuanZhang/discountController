@@ -2,7 +2,7 @@ package com.xmu.discount.dao;
 
 import com.github.pagehelper.PageHelper;
 import com.xmu.discount.domain.CouponRulePo;
-import com.xmu.discount.discountDo.CouponRuleDo;
+import com.xmu.discount.discountdo.CouponRuleDo;
 import com.xmu.discount.mapper.CouponRuleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -114,8 +114,8 @@ public class CouponRuleDao {
      */
     public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        List<CouponRulePo> CouponRulePos = couponRuleMapper.adminGetAllCouponRulePos();
-        return CouponRulePos;
+        List<CouponRulePo> couponRulePos = couponRuleMapper.adminGetAllCouponRulePos();
+        return couponRulePos;
     }
 
 
@@ -127,16 +127,16 @@ public class CouponRuleDao {
     public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         LocalDateTime localDateTime = LocalDateTime.now();
-        List<CouponRulePo> CouponRulePos = couponRuleMapper.userGetAllCouponRulePos();
+        List<CouponRulePo> couponRulePos = couponRuleMapper.userGetAllCouponRulePos();
 
-        Iterator<CouponRulePo> iterator = CouponRulePos.iterator();
+        Iterator<CouponRulePo> iterator = couponRulePos.iterator();
         while(iterator.hasNext()){
             CouponRulePo couponRulePo = iterator.next();
             if (couponRulePo.getEndTime().isBefore(localDateTime) || couponRulePo.getBeginTime().isAfter(localDateTime)) {
                 iterator.remove();   //注意这个地方
             }
         }
-        return CouponRulePos;
+        return couponRulePos;
     }
 
     /**
