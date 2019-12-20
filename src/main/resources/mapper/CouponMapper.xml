@@ -13,18 +13,18 @@
         <result column="pic_url" property="picUrl"/>
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modified" property="gmtModified"/>
-        <result column="is_deleted" property="beDelete"/>
+        <result column="is_deleted" property="beDeleted"/>
         <result column="status" property="statusCode"/>
     </resultMap>
     <select id="findCouponById" parameterType="Integer" resultMap="couponPo">
-        select id,user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,is_deleted status from oomall_coupon where id=#{id}
+        select id,user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,is_deleted status from oomall_coupon where id=#{id} and is_deleted=0
     </select>
     <insert id="addCouponPo" parameterType="couponPo" useGeneratedKeys="true" keyProperty="id">
         insert into oomall_coupon(user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,status)
         values (#{userId},#{couponRuleId},#{couponSn},#{beginTime},#{endTime},#{usedTime},#{name}, #{picUrl}, #{gmtCreate}, #{gmtModified},#{statusCode})
     </insert>
     <delete id="deleteCouponById" parameterType="Integer">
-        update oomall_coupon setis_delete=#{beDelete} where id=1
+        update oomall_coupon setis_delete=#{beDeleted} where id=1
     </delete>
     <update id="updateCoupon" parameterType="couponPo">
         update oomall_coupon
@@ -39,18 +39,18 @@
             <if test="picUrl!=null">pic_url=#{picUrl},</if>
             <if test="gmtCreate!=null">gmt_create=#{gmtCreate},</if>
             <if test="gmtModified!=null">gmt_modified=#{gmtModified},</if>
-            <if test="beDelete!=null">is_delete=#{beDelete},</if>
+            <if test="beDeleted!=null">is_delete=#{beDeleted},</if>
             <if test="statusCode!=null">status=#{statusCode},</if>
         </trim>
         WHERE id=#{id}
     </update>
 
-    <select id="getAllStatusCouponPos" parameterType="Integer" resultType="couponPo">
-        select * from oomall_coupon where status=#{showType}
+    <select id="getAllStatusCouponPos" parameterType="Integer" resultMap="couponPo">
+        select * from oomall_coupon where status=#{showType} and is_deleted=0
     </select>
 
-    <select id="getCouponPoByCouponRuleId" parameterType="Integer" resultType="couponPo">
-        select id,user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,is_deleted status from oomall_coupon where is_deleted=0 and coupon_rule_id in #{couponRuleIdString}
+    <select id="getCouponPoByCouponRuleId" parameterType="Integer" resultMap="couponPo">
+        select id,user_id,coupon_rule_id,coupon_sn,begin_time,end_time,used_time,name,pic_url,gmt_create,gmt_modified,is_deleted status from oomall_coupon where is_deleted=0 and coupon_rule_id=#{couponRuleId}
     </select>
 
 

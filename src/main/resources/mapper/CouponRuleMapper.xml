@@ -16,9 +16,11 @@
         <result column="goods_list2" property="goodsList2"/>
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modified" property="gmtModified"/>
-        <result column="is_deleted" property="beDelete"/>
+        <result column="is_deleted" property="beDeleted"/>
+        <result column="status" property="statusCode"/>
     </resultMap>
     <resultMap id="couponRuleDo" type="com.xmu.discount.discountDo.CouponRuleDo">
+
         <id column="id" property="id"/>
         <result column="goods_list1" property="goodsList1"/>
         <result column="goods_list2" property="goodsList2"/>
@@ -26,21 +28,28 @@
 
 
     <select id="findCouponRulePoById" parameterType="Integer" resultMap="couponRulePo">
-        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted from oomall_coupon_rule where id=#{id} and is_deleted=0
+        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,status,is_deleted from oomall_coupon_rule where id=#{id} and is_deleted=0
     </select>
 
-    <insert id="addCouponRulePo" parameterType="couponRulePo" useGeneratedKeys="true" keyProperty="id">
-        insert into oomall_coupon_rule(name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified)
-        values (#{name},#{brief},#{beginTime},#{endTime},#{picUrl},#{validPeriod},#{strategy}, #{total},#{collectedNum}, #{goodsList1}, #{goodsList2},#{gmtCreate},#{gmtModified})
+    <insert id="addCouponRulePo" parameterType="couponRulePo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into oomall_coupon_rule(name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,status)
+        values (#{name},#{brief},#{beginTime},#{endTime},#{picUrl},#{validPeriod},#{strategy}, #{total},#{collectedNum}, #{goodsList1}, #{goodsList2},#{gmtCreate},#{gmtModified},#{statusCode})
     </insert>
 
     <!-- 记得先判断 is_deleted=0 -->
     <update id="deleteCouponRulePoById" parameterType="Integer">
-        update oomall_coupon_rule is_delete=1 WHERE id=#{id}
+        update oomall_coupon_rule set is_deleted=1 WHERE id=#{id} and is_deleted=0
     </update>
 
 
-    <!-- 记得先判断 is_deleted=0 -->
+    <update id="updateCouponRulePoOnlyTwo" parameterType="couponRulePo">
+        update oomall_coupon_rule
+        <trim prefix="set" suffixOverrides=",">
+            <if test="total!=null">total=#{total},</if>
+            <if test="collectedNum!=null">collected_num=#{collectedNum},</if>
+        </trim>
+        WHERE id=#{id} and is_deleted=0
+    </update>
     <update id="updateCouponRulePo" parameterType="couponRulePo">
         update oomall_coupon_rule
         <trim prefix="set" suffixOverrides=",">
@@ -49,31 +58,30 @@
             <if test="beginTime!=null">begin_time=#{beginTime},</if>
             <if test="endTime!=null">end_time=#{endTime},</if>
             <if test="picUrl!=null">pic_url=#{picUrl},</if>
+            <if test="statusCode!=null">status=#{statusCode},</if>
             <if test="gmtModified!=null">gmt_modified=#{gmtModified},</if>
             <if test="validPeriod!=null">valid_period=#{validPeriod},</if>
             <if test="goodsList1!=null">goods_list1=#{goodsList1},</if>
             <if test="goodsList2!=null">goods_list2=#{goodsList2},</if>
             <if test="strategy!=null">strategy=#{strategy},</if>
-            <if test="total!=null">total=#{total}</if>
-            <if test="collectedNum!=null">collected_num=#{collectedNum}</if>
         </trim>
-        WHERE id=#{id} and is_delete=0
+        WHERE id=#{id} and is_deleted=0
     </update>
 
-    <select id="adminGetAllCouponRulePos" resultType="couponRulePo" >
-        select * from oomall_coupon_rule where is_deleted=0
+    <select id="adminGetAllCouponRulePos" resultMap="couponRulePo">
+        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,status,is_deleted from oomall_coupon_rule where is_deleted=0
     </select>
 
-    <select id="userGetAllCouponRulePos"  resultType="couponRulePo" >
-        select * from oomall_coupon_rule where is_deleted=0
+    <select id="userGetAllCouponRulePos" resultMap="couponRulePo">
+        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,status,is_deleted from oomall_coupon_rule where is_deleted=0
     </select>
 
-    <select id="getAllCouponRuleDos" resultType="couponRuleDo">
+    <select id="getAllCouponRuleDos" resultMap="couponRuleDo">
         select id,goods_list1,goods_list2 from oomall_coupon_rule where is_deleted=0
     </select>
 
 
-    <select id="getCouponRulePosByIds" parameterType="String" resultType="couponRulePo">
-        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted from oomall_coupon_rule where id in #{couponRuleIdString} and is_deleted=0
+    <select id="getCouponRulePosByIds" parameterType="String" resultMap="couponRulePo">
+        select id,name,brief,begin_time,end_time,pic_url,valid_period,strategy,total,collected_num,goods_list1,goods_list2,gmt_create,gmt_modified,is_deleted,status from oomall_coupon_rule where id in #{couponRuleIdString} and is_deleted=0
     </select>
 </mapper>

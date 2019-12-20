@@ -41,14 +41,15 @@ public interface CouponMapper {
 
     /**
      * 获取所有特定类型的优惠券
+     * @param showType
      * @return
      */
     public List<CouponPo> getAllStatusCouponPos(Integer showType);
 
     /**
-     * 查找couponRuleId在给出的list(已经转为String)中的couponPo
-     * @param couponRuleIdString
+     * 通过couponRule的Id获取coupon（其couponRuleId等于此couponRule的Id）
+     * @param couponRuleId
      * @return
      */
-    public List<CouponPo> getCouponPoByCouponRuleId( String couponRuleIdString );
+    public List<CouponPo> getCouponPoByCouponRuleId( Integer couponRuleId );
 }

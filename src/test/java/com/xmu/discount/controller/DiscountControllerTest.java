@@ -1,5 +1,8 @@
 package com.xmu.discount.controller;
 
+import com.xmu.discount.domain.CartItem;
+import com.xmu.discount.domain.Coupon;
+import com.xmu.discount.domain.CouponPo;
 import com.xmu.discount.domain.CouponRulePo;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author Zhang BingYuan
@@ -25,6 +30,8 @@ public class DiscountControllerTest {
     DiscountController discountController;
 
     static CouponRulePo couponRulePo = new CouponRulePo();
+    static CouponPo couponPo = new CouponPo();
+
     @Before
     public void getCouponRulePo() {
         System.out.println("DiscountControllerTest");
@@ -32,8 +39,8 @@ public class DiscountControllerTest {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime time = LocalDateTime.now();
         String localTime = df.format(time);
-        LocalDateTime beginTime = LocalDateTime.parse("2019-09-28 17:07:05",df);
-        LocalDateTime endTime = LocalDateTime.parse("2020-09-28 17:07:05",df);
+        LocalDateTime beginTime = LocalDateTime.parse("2019-09-28 17:07:05", df);
+        LocalDateTime endTime = LocalDateTime.parse("2020-09-28 17:07:05", df);
 
         couponRulePo.setName("优惠券规则");
         couponRulePo.setBeginTime(beginTime);
@@ -46,19 +53,77 @@ public class DiscountControllerTest {
         couponRulePo.setGoodsList1("1,2,3,4,7,8,9");
         couponRulePo.setGoodsList2("");
         couponRulePo.setPicUrl("url");
+        couponRulePo.setStatusCode(true);
+
+        couponPo.setName("优惠券");
+        couponPo.setUserId(123);
+        couponPo.setBeginTime(beginTime);
+        couponPo.setEndTime(endTime);
+        couponPo.setCouponRuleId(253);
+        couponPo.setUsedTime(LocalDateTime.now());
+        couponPo.setCouponSn("6545468549dasdada");
+        couponPo.setPicUrl("http://sakjdgjaskgdbiada");
+        couponPo.setStatusCode(1);
+
+//        List<CartItem> cartItems = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            CartItem
+//        }
     }
 
 
     @Test
     public void adminGetAllCouponRulePos() throws Exception {
-        discountController.getAllCoupons(3,3,0);
+        Object allCoupons = discountController.adminGetAllCouponRulePos(3, 6);
+        System.out.println(allCoupons);
     }
 
     @Test
     public void addCouponRulePo() {
-        System.out.println(couponRulePo);
-        for (int i = 100; i > 0; i--) {
-            Object o = discountController.addCouponRulePo(couponRulePo);
+        for (int i = 10; i > 0; i--) {
+            Object object = discountController.addCouponRulePo(couponRulePo);
+            System.out.println(object);
         }
+    }
+
+    @Test
+    public void userGetAllCouponRulePos() {
+        Object allCoupons = discountController.userGetAllCouponRulePos(3, 6);
+        System.out.println(allCoupons);
+    }
+
+    @Test
+    public void findCouponRule() throws Exception {
+        Object couponRule = discountController.findCouponRule(276);
+        System.out.println(couponRule);
+    }
+
+    @Test
+    public void updateCouponRule() {
+        couponRulePo.setBrief("修改了");
+        System.out.println(couponRulePo);
+        Object object = discountController.updateCouponRule(276, couponRulePo);
+        System.out.println(object);
+    }
+
+    @Test
+    public void deleteCouponRule() {
+        discountController.deleteCouponRulePo(276);
+    }
+
+    @Test
+    public void addCoupon() {
+        Object object = discountController.addCoupon(couponPo);
+    }
+
+    @Test
+    public void getCoupons() throws Exception {
+        Object allCoupons = discountController.getAllCoupons(3, 6, 1);
+        System.out.println(allCoupons);
+    }
+
+    @Test
+    public void getAvailableCoupons() {
+
     }
 }

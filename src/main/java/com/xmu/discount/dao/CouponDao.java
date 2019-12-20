@@ -41,7 +41,8 @@ public class CouponDao {
         couponPo.setGmtCreate(localDateTime);
         couponPo.setGmtModified(localDateTime);
         Integer integer = couponMapper.addCouponPo(couponPo);
-        if (integer>0) {
+        if (integer==1) {
+            couponPo.setBeDeleted(false);
             return couponPo;
         }
         return null;
@@ -82,8 +83,14 @@ public class CouponDao {
         return CouponPos;
     }
 
-    public List<CouponPo> getCouponPoByCouponRuleId(String couponRuleIdString) {
-        List<CouponPo> couponPoByCouponRuleId = couponMapper.getCouponPoByCouponRuleId(couponRuleIdString);
+
+    /**
+     * 通过couponRule的Id获取coupon（其couponRuleId等于此couponRule的Id）
+     * @param couponRuleId
+     * @return
+     */
+    public List<CouponPo> getCouponPoByCouponRuleId(Integer couponRuleId) {
+        List<CouponPo> couponPoByCouponRuleId = couponMapper.getCouponPoByCouponRuleId(couponRuleId);
         return couponPoByCouponRuleId;
     }
 

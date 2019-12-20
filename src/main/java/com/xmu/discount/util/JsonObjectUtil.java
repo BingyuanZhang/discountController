@@ -34,7 +34,6 @@ public class JsonObjectUtil {
 
         } else if ("NumberStrategy".equals(name)) {
             NumberStrategyName numberStrategyName = JSONObject.toJavaObject(jsonObject, NumberStrategyName.class);
-            System.out.println(numberStrategyName);
             strategy = numberStrategyName.getObj();
         } else if ("PercentageStrategy".equals(name)) {
             PercentageStrategyName percentageStrategyName = JSONObject.toJavaObject(jsonObject, PercentageStrategyName.class);

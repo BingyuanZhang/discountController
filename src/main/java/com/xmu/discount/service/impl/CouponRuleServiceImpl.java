@@ -1,5 +1,6 @@
 package com.xmu.discount.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.xmu.discount.dao.CouponRuleDao;
 import com.xmu.discount.domain.CouponRule;
 import com.xmu.discount.domain.CouponRulePo;
@@ -37,8 +38,8 @@ public class CouponRuleServiceImpl implements CouponRuleService {
      */
     @Override
     public Integer deleteCouponRulePoById(Integer id) {
-        Integer id1 = couponRuleDao.deleteCouponRulePoById(id);
-        return id1;
+        Integer integer = couponRuleDao.deleteCouponRulePoById(id);
+        return integer;
     }
     /**
      * 通过id更新CouponRule
@@ -73,6 +74,9 @@ public class CouponRuleServiceImpl implements CouponRuleService {
     @Override
     public List<CouponRulePo> adminGetAllCouponRulePos(Integer page, Integer limit) {
         List<CouponRulePo> allCouponRulePos = couponRuleDao.adminGetAllCouponRulePos(page, limit);
+        for (CouponRulePo allCouponRulePo : allCouponRulePos) {
+            allCouponRulePo.setBeDeleted(false);
+        }
         return allCouponRulePos;
     }
 
@@ -85,6 +89,9 @@ public class CouponRuleServiceImpl implements CouponRuleService {
     @Override
     public List<CouponRulePo> userGetAllCouponRulePos(Integer page, Integer limit) {
         List<CouponRulePo> allCouponRulePos = couponRuleDao.userGetAllCouponRulePos(page, limit);
+        for (CouponRulePo allCouponRulePo : allCouponRulePos) {
+            allCouponRulePo.setBeDeleted(false);
+        }
         return allCouponRulePos;
     }
 }

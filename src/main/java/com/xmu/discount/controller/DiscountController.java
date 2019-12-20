@@ -94,8 +94,8 @@ public class DiscountController {
      */
     @DeleteMapping("/couponRules/{id}")
     public Object deleteCouponRulePo(@PathVariable Integer id) {
-        Integer id1 = couponRuleService.deleteCouponRulePoById(id);
-        if (id1.equals(null)) {
+        Integer integer = couponRuleService.deleteCouponRulePoById(id);
+        if (!integer.equals(1)) {
             return ResponseUtil.couponRuleDeleteFail();
         }
         return ResponseUtil.ok();

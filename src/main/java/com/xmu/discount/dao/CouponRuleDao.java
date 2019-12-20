@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,8 +30,9 @@ public class CouponRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         couponRulePo.setGmtModified(localDateTime);
         couponRulePo.setGmtCreate(localDateTime);
-        Integer id = couponRuleMapper.addCouponRulePo(couponRulePo);
-        if (id>0) {
+        couponRuleMapper.addCouponRulePo(couponRulePo);
+        if (couponRulePo.getId()>0) {
+            couponRulePo.setBeDeleted(false);
             return couponRulePo;
         }
         return null;
@@ -43,17 +45,18 @@ public class CouponRuleDao {
      * @return
      */
     public Integer deleteCouponRulePoById(Integer id) {
+        Integer integer=0;
         try {
-            couponRuleMapper.deleteCouponRulePoById(id);
+            integer = couponRuleMapper.deleteCouponRulePoById(id);
         } catch (Exception e) {
             System.out.println(e);
             return null;
         }
-        return id;
+        return integer;
     }
 
     /**
-     * 通过id更新CouponRule
+     * 通过id更新CouponRule(不更新数量)
      *
      * @param id
      * @param couponRulePo
@@ -64,13 +67,33 @@ public class CouponRuleDao {
         LocalDateTime localDateTime = LocalDateTime.now();
         couponRulePo.setGmtModified(localDateTime);
         try {
-            Integer integer = couponRuleMapper.updateCouponRulePo(couponRulePo);
+            couponRuleMapper.updateCouponRulePo(couponRulePo);
         } catch (Exception e) {
             System.out.println(e);
             return null;
         }
         return couponRulePo;
 
+    }
+
+    /**
+     * 通过id更新CouponRule(更新数量)
+     *
+     * @param id
+     * @param couponRulePo
+     * @return
+     */
+    public CouponRulePo updateCouponRulePoOnlyTwo(Integer id, CouponRulePo couponRulePo) {
+        couponRulePo.setId(id);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        couponRulePo.setGmtModified(localDateTime);
+        try {
+            couponRuleMapper.updateCouponRulePoOnlyTwo(couponRulePo);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+        return couponRulePo;
     }
 
     /**
@@ -105,9 +128,12 @@ public class CouponRuleDao {
         PageHelper.startPage(page, limit);
         LocalDateTime localDateTime = LocalDateTime.now();
         List<CouponRulePo> CouponRulePos = couponRuleMapper.userGetAllCouponRulePos();
-        for (CouponRulePo couponRulePo : CouponRulePos) {
+
+        Iterator<CouponRulePo> iterator = CouponRulePos.iterator();
+        while(iterator.hasNext()){
+            CouponRulePo couponRulePo = iterator.next();
             if (couponRulePo.getEndTime().isBefore(localDateTime) || couponRulePo.getBeginTime().isAfter(localDateTime)) {
-                CouponRulePos.remove(couponRulePo);
+                iterator.remove();   //注意这个地方
             }
         }
         return CouponRulePos;
@@ -123,16 +149,6 @@ public class CouponRuleDao {
         return allCouponRuleDos;
     }
 
-    /**
-     * 通过多个id获取多个couponRule
-     *
-     * @param couponRuleIdString
-     * @return
-     */
-    public List<CouponRulePo> getCouponRulePosByIds(String couponRuleIdString) {
-        List<CouponRulePo> couponRulePosByIds = couponRuleMapper.getCouponRulePosByIds(couponRuleIdString);
-        return couponRulePosByIds;
-    }
 
 
 }

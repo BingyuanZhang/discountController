@@ -33,6 +33,14 @@ public interface CouponRuleMapper {
      * @return
      */
     public Integer updateCouponRulePo(CouponRulePo couponRulePo);
+
+    /**
+     * 更新CouponRule
+     * @param couponRulePo
+     * @return
+     */
+    public Integer updateCouponRulePoOnlyTwo(CouponRulePo couponRulePo);
+
     /**
      * 通过id查找CouponRule
      * @param id
@@ -64,4 +72,5 @@ public interface CouponRuleMapper {
      * @return
      */
     public List<CouponRulePo> userGetAllCouponRulePos();
+
 }
