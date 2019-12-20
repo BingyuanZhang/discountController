@@ -46,12 +46,12 @@ public class PresaleRuleController {
      * @return
      */
     @PostMapping("/presaleRules")
-    public PresaleRule addPresaleRule(@RequestBody PresaleRule presaleRule) {
+    public Object addPresaleRule(@RequestBody PresaleRule presaleRule) {
         PresaleRule presaleRule1 = presaleRuleService.addPresaleRule(presaleRule);
         if (presaleRule1.equals(null)) {
             ResponseUtil.presaleInsertFail();
         }
-        return presaleRule1;
+        return ResponseUtil.ok(presaleRule1);
     }
 
     /**
@@ -62,12 +62,12 @@ public class PresaleRuleController {
      * @return
      */
     @PutMapping("/presaleRules/{id}")
-    public PresaleRule updatePresaleRuleById(@PathVariable Integer id, @RequestBody PresaleRule presaleRule) {
+    public Object updatePresaleRuleById(@PathVariable Integer id, @RequestBody PresaleRule presaleRule) {
         PresaleRule presaleRule1 = presaleRuleService.updatePresaleRuleById(id, presaleRule);
         if (presaleRule1.equals(null)) {
             ResponseUtil.presaleUpdateFail();
         }
-        return presaleRule1;
+        return ResponseUtil.ok(presaleRule1);
     }
 
     /**
@@ -77,11 +77,11 @@ public class PresaleRuleController {
      * @return
      */
     @GetMapping("/presaleRules/{id}")
-    public PresaleRuleVo getPresaleRuleVoById(@PathVariable Integer id) {
+    public Object getPresaleRuleVoById(@PathVariable Integer id) {
         PresaleRuleVo presaleRuleVoById = presaleRuleService.findPresaleRuleVoById(id);
         if (presaleRuleVoById.equals(null)) {
             ResponseUtil.presaleRuleUnknown();
         }
-        return presaleRuleVoById;
+        return ResponseUtil.ok(presaleRuleVoById);
     }
 }

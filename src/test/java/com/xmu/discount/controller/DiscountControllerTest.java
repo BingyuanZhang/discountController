@@ -37,8 +37,7 @@ public class DiscountControllerTest {
         System.out.println("DiscountControllerTest");
 
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime time = LocalDateTime.now();
-        String localTime = df.format(time);
+        LocalDateTime localDateTime = LocalDateTime.now();
         LocalDateTime beginTime = LocalDateTime.parse("2019-09-28 17:07:05", df);
         LocalDateTime endTime = LocalDateTime.parse("2020-09-28 17:07:05", df);
 

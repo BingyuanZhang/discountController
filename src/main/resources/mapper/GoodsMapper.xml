@@ -26,7 +26,7 @@
         <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
-    <select id="findCouponById" parameterType="Integer" resultMap="goodsPo">
-        select id,name,goods_sn,short_name,description,brief,pic_url,detail,status,share_url,gallery,goods_category_id,brand_id,weight,volume,special_freight_id,is_special,price,is_deleted,gmt_create,gmt_modified from oomall_goods where id=#{goodsId}
+    <select id="findGoodsPoById" parameterType="Integer" resultMap="goodsPo">
+        select * from oomall_goods where id=#{goodsId}
     </select>
 </mapper>
